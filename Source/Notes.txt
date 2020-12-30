@@ -1,0 +1,25 @@
+=============== Copyright Connor McLaughlan, All rights reserved. =============
+
+Naming conventions:
+    Class members:
+        - Don't use m_genericMember; use this->genericMember where possible.
+
+    Global variables:
+        - Use g_GlobalVariable .
+
+    Global constants:
+        - Use GLOBAL_CONSTANT .
+
+
+Subsystems:
+    - Systems should have an abstract interface declared in a .h file.
+    - Should use a global variable declared in a .cpp file for each system.
+    - Source Engine: 
+        "Each subsystem defines an abstract interface in a .h file, 
+        while typically implementing it and creating a global variable in a .cpp 
+        file. Through macros or by simply adding it to the client/server's 
+        initialization function, that global variable is added to the list of 
+        active systems. Once hooked up, the existing hooks take care of 
+        initialization, shutdown, and calling the appropriate update functions 
+        as necessary." [https://developer.valvesoftware.com/wiki/Engine_Structure]
+

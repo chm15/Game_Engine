@@ -1,0 +1,24 @@
+=============== Copyright Connor McLaughlan, All rights reserved. =============
+
+- Source Engine: 
+    "You must now tell the server that the entity class should be networked 
+    and that a corresponding client class exists with the 
+    DECLARE_SERVERCLASS() macro, which will register the class in a global 
+    server class list and reserve a unique class ID. Place it in the class 
+    definition (i.e. H file). The corresponding macros IMPLEMENT_SERVERCLASS_ST 
+    and END_SEND_TABLE() must be placed in the class's implementation (i.e. 
+    CPP file) one after another to register the server class and its SendTable 
+    (these are covered in the next section)." 
+    [https://developer.valvesoftware.com/wiki/Networking_Entities]
+
+
+Movement:
+    
+    - Mark as Client_Authoritative
+    - On server-side the serialization method could implement rules on max and min values of
+        movement-component members.
+    - Server could tell the client it's client-id. The client could use this to figure out which movement component to update. 
+        The server could use client-id's to determine which movement component to update on the server-side based on the 
+        client-id associated with the connection object.
+
+
