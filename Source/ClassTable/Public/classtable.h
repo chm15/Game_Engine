@@ -5,8 +5,8 @@
 //
 //=============================================================================
 
-#ifndef SEND_TABLE_H
-#define SEND_TABLE_H
+#ifndef CLASS_TABLE_H
+#define CLASS_TABLE_H
 
 class ClassTable {
 public:
