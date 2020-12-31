@@ -1,4 +1,7 @@
-Build/*
 ._.DS_Store
 .DS_Store
 ._CMakeLists.txt
+
+
+Build/*
+!Build/.gitkeep
