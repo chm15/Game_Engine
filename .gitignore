@@ -1,7 +1,28 @@
-._.DS_Store
+# =============== Ignore Mac Generated Files ================
+# Folder view configuration files
 .DS_Store
-._CMakeLists.txt
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Compiled Python files
+*.pyc
+
+# Compiled C++ files
+*.out
+
+# Application specific files
+venv
+node_modules
+.sass-cache
 
 
+# ======= Keep build directory, but nothing inside it ===========
 Build/*
 !Build/.gitkeep
