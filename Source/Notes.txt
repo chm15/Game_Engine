@@ -9,6 +9,9 @@ Naming conventions:
 
     Global constants:
         - Use GLOBAL_CONSTANT .
+    
+    Macros:
+        - MY_MACRO()
 
 
 Subsystems:
