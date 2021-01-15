@@ -1,0 +1,10 @@
+=============== Copyright Connor McLaughlan, All rights reserved. =============
+
+
+Snapshot:
+    -A snapshot is a sequence of ObjectFrames.
+
+
+ObjectFrame:
+    -A ObjectFrame is an id (int) followed by an encodeable object (maybe as a
+        pointer). The id describes the type of GameObject that was sent.

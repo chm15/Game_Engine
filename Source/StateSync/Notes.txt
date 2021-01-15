@@ -1,0 +1,12 @@
+=============== Copyright Connor McLaughlan, All rights reserved. =============
+
+- State synchronization seems to be better suited for ECS than snapshot interpolation.
+
+- State synchronization requires that the server maintains a priority
+    accumulator array for each connected client. The priority accumulator array
+    would accumulate the priority value of each entity that has a Net component 
+    every game tick. When the client acknowledges a Sync message, the server will 
+    reset the values for the entities that were sent in the previous Sync message. 
+    If the server sends one sync message, then comes back around to send another 
+    before the client will respond, the server will ignore any ack responses for 
+    the first Sync message since it was invalidated by new data.
