@@ -10,3 +10,20 @@
     If the server sends one sync message, then comes back around to send another 
     before the client will respond, the server will ignore any ack responses for 
     the first Sync message since it was invalidated by new data.
+
+
+
+
+Steps for state synchronization:
+    1. Server tells client to instantiate a new entity.
+    2. Server tells client to update certain (default) components of the new
+        entity.
+
+    - Steps 1 and 2 can be done in the same message (and should be).
+    - Error checking must be done. If step 2 finds that the entity doesn't
+        exist, the new component data in step 2 should be thrown out. If 
+        step 1 failed to happen before step 2, the server will be aware, and
+        will resend the data for both step 1 and 2 next tick. At this point
+        the data for step 2 will likely be different from the data thrown
+        out in the previous tick, this is why no effort should be made to
+        save the previous data.
