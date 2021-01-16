@@ -13,12 +13,21 @@
 
 
 Movement:
-    
     - Mark as Client_Authoritative
-    - On server-side the serialization method could implement rules on max and min values of
-        movement-component members.
-    - Server could tell the client it's client-id. The client could use this to figure out which movement component to update. 
-        The server could use client-id's to determine which movement component to update on the server-side based on the 
-        client-id associated with the connection object.
+    - On server-side the serialization method could implement rules on max 
+        and min values of movement-component members.
+    - Server could tell the client it's client-id. The client could use this to 
+        figure out which movement component to update. The server could use 
+        client-id's to determine which movement component to update on the 
+        server-side based on the client-id associated with the connection 
+        object.
 
+
+Registration of Components and Entities:
+    - Use macro to instantiate entity/component manager in global Entity Admin.
+    - Something like "g_EntityAdmin.addComponentManager<MyComponent>()" in the 
+        macro.
+    - All entities are the same size, registration is only used to specify
+        which components need to be instantiated upon the creation of a new
+        entity. The entity itself should only contain an id (uint/ulong).
 
