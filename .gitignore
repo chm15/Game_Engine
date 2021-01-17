@@ -26,3 +26,7 @@ node_modules
 # ======= Keep build directory, but nothing inside it ===========
 Build/*
 !Build/.gitkeep
+
+
+# ======= Ignore compiled documentation files ========
+Documentation.txt
