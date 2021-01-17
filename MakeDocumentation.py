@@ -47,7 +47,7 @@ def main():
         inFile = open(path, 'r')
 
         # Write sub-header
-        outFile.write("\n\n" + "===== " + dirName + " =====")
+        outFile.write("\n\n"+ "="*80 + "\n\n\t" + dirName + "\n\n" + "="*80 + "\n")
 
         for line in inFile:
             # Don't write line to outFile if it is the copyright header.
@@ -58,7 +58,7 @@ def main():
         inFile.close()
 
     # Write documentation footer.
-    outFile.write("\n\n\n=============== Copyright Connor McLaughlan, All rights reserved. =============")
+    outFile.write("\n\n\n=============== Copyright Connor McLaughlan, All rights reserved. ==============")
     outFile.close()
 
 
