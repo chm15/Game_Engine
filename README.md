@@ -6,7 +6,7 @@ This is an entity-component-system based multiplayer game engine.
 
 From the base directory:
 ``` shell
-cd Build  
-cmake ../  
-make  
+cd Build
+cmake ../
+make
 ```
