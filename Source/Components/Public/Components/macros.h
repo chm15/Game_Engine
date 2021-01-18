@@ -24,11 +24,11 @@ int CURRENT_CLASS_ID = 0;
 
 // DO NOT create this in the header! Put it in the main CPP file.
 #define IMPLEMENT_COMPONENT(ComponentName) \
-    extern classtable::g_ClassTable; \
+    extern ClassTable g_ClassTable; \
     \
     static GameEngineClass g_##ComponentName##_ClassReg( \
             #ComponentName,  \
-            &classtable::g_ClassTable, \
+            &ClassTable g_ClassTable, \
     ); \
     \
 	GameEngineClass* ComponentName::getServerClass() {return &g_##ComponentName##_ClassReg;} \

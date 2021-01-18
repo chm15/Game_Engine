@@ -1,12 +1,12 @@
 set(
     SOURCES 
-        "Private/component.cpp"
+        "Private/coordinator.cpp"
 )
 
 
 cmake_minimum_required(VERSION 3.16)
 
-project(Components)
+project(Coordinator)
 
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES} )
@@ -16,4 +16,6 @@ target_include_directories( ${PROJECT_NAME}
     PRIVATE ${PROJECT_SOURCE_DIR}/Public/${PROJECT_NAME}
 )
 
-target_link_libraries(Components ClassTable)
+target_link_libraries(Coordinator PUBLIC Entities Components Systems)
+
+

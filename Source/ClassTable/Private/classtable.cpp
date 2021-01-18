@@ -5,7 +5,7 @@
 //
 //=============================================================================
 
-#include "ClassTable/classtable.h"
+#include "classtable.h"
 
 namespace classtable 
 {
@@ -13,4 +13,3 @@ namespace classtable
     ClassTable g_ClassTable;
 }
 
-#endif
