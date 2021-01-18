@@ -15,3 +15,8 @@ add_subdirectory(Source)
 
 target_link_libraries(GameEngine Components)
 
+
+
+# Unit Tests
+enable_testing()
+add_subdirectory(Test)

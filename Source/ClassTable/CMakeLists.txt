@@ -16,10 +16,3 @@ target_include_directories( ${PROJECT_NAME}
     PRIVATE ${PROJECT_SOURCE_DIR}/Public/${PROJECT_NAME}
 )
 
-
-add_executable(TEST_${PROJECT_NAME} ${SOURCES} Test/main.cpp)
-
-target_include_directories( TEST_${PROJECT_NAME}
-    PUBLIC ${PROJECT_SOURCE_DIR}/Public
-    PRIVATE ${PROJECT_SOURCE_DIR}/Public/${PROJECT_NAME}
-)
