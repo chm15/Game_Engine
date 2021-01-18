@@ -11,8 +11,8 @@
 
 
 struct Velocity {
-    //DECLARE_COMPONENT();
+    DECLARE_ENGINE_CLASS();
 };
-//IMPLEMENT_COMPONENT(Velocity);
+IMPLEMENT_ENGINE_CLASS(Velocity);
 
 #endif

@@ -15,14 +15,13 @@ public:
 
 };
 
-class GameEngineClass {
+class EngineClass {
 public:
     const char *networkName;
     ClassTable *table;
 
 public:
-    GameEngineClass(const char* pNetworkName, ClassTable *pTable) : networkName(pNetworkName), table(pTable) { }
-
+    EngineClass(const char* pNetworkName, ClassTable *pTable) : networkName(pNetworkName), table(pTable) { }
 };
 
 #endif

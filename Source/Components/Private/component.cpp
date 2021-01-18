@@ -1,1 +1,1 @@
-#include "component.h"
+#include "common.h"

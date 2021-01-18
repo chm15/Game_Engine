@@ -13,7 +13,9 @@
 
 
 // GLOBAL VARIABLES:
-Coordinator g_Coordinator;
+namespace coordinator {
+    Coordinator g_Coordinator;
+}
 
 
 
