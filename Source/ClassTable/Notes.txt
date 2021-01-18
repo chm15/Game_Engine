@@ -1,0 +1,13 @@
+=============== Copyright Connor McLaughlan, All rights reserved. =============
+
+- The class table is used to register classes that can be identifie at run-time
+    by the engine. When a class is registered with the DEFINE_ENGINE_CLASS and
+    IMPLEMENT_ENGINE_CLASS macros, the class gets className and classID
+    variables.
+
+- className is a string of the class's name. If a class called ExampleClass
+    were registered, ExampleClass::className would be "ExampleClass".
+
+- classID is a unique int given to the class. It is important that the server
+    and client have their classes registered in the same order so that the
+    classID's mesh properly.

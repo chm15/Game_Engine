@@ -34,7 +34,7 @@ Registration of Components and Entities:
 
 ComponentManager:
     - Any components that are registered with the component manager
-        should have alrady been registered with the engine's class
+        should have already been registered with the engine's class
         table.
 
     - For good measure, it should be asserted that the component is already

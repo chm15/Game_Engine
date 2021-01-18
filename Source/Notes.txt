@@ -5,10 +5,10 @@ Naming conventions:
         - Don't use m_genericMember; use this->genericMember where possible.
 
     Global variables:
-        - Use g_GlobalVariable .
+        - Use g_Variable .
 
     Global constants:
-        - Use GLOBAL_CONSTANT .
+        - Use GENERIC_CONSTANT .
     
     Macros:
         - MY_MACRO()
