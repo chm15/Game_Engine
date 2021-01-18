@@ -28,7 +28,7 @@ int CURRENT_CLASS_ID = 0;
     \
     static GameEngineClass g_##ComponentName##_ClassReg( \
             #ComponentName,  \
-            &ClassTable g_ClassTable, \
+            &ClassTable g_ClassTable \
     ); \
     \
 	GameEngineClass* ComponentName::getServerClass() {return &g_##ComponentName##_ClassReg;} \

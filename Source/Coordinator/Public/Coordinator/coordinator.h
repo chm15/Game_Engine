@@ -8,14 +8,17 @@
 #include <string>
 #include <iostream>
 #include <memory>
+#include "Entities/entitymanager.h"
+#include "Components/componentmanager.h"
+#include "Systems/systemmanager.h"
 
 
-class Cooordinator {
+class Coordinator {
     // Contains a EntityManager, ComponentManager, and SystemManager.
 public:
-    EntityManager* entityManager;
-    ComponentManager* componentManager;
-    SystemManager* systemManager;
+    std::unique_ptr<EntityManager> entityManager;
+    std::unique_ptr<ComponentManager> componentManager;
+    std::unique_ptr<SystemManager> systemManager;
 
 public:
     Coordinator();

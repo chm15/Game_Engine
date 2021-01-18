@@ -6,8 +6,8 @@
 
 
 struct Position {
-    DECLARE_COMPONENT();
+    //DECLARE_COMPONENT();
 };
-IMPLEMENT_COMPONENT(Position);
+//IMPLEMENT_COMPONENT(Position);
 
 #endif

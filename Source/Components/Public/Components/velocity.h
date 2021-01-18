@@ -11,8 +11,8 @@
 
 
 struct Velocity {
-    DECLARE_COMPONENT();
+    //DECLARE_COMPONENT();
 };
-IMPLEMENT_COMPONENT(Velocity);
+//IMPLEMENT_COMPONENT(Velocity);
 
 #endif

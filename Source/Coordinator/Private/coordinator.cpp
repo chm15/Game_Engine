@@ -5,6 +5,7 @@
 //
 //=============================================================================
 
+#include <memory>
 #include "coordinator.h"
 #include "Entities/entitymanager.h"
 #include "Components/componentmanager.h"
