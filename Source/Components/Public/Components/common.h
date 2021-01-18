@@ -7,7 +7,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#include "macros.h"
+#include "ClassTable/macros.h"
 #include "ClassTable/classtable.h"
 
 #endif

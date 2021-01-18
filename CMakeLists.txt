@@ -13,3 +13,5 @@ add_executable(GameEngine Source/main.cpp)
 
 add_subdirectory(Source)
 
+target_link_libraries(GameEngine Components)
+

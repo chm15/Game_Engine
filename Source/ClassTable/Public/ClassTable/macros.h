@@ -9,7 +9,7 @@
 #define MACROS_H
 
 #include <string>
-#include "common.h"
+#include "classtable.h"
 
 
 int CURRENT_CLASS_ID = 0;
@@ -24,11 +24,14 @@ int CURRENT_CLASS_ID = 0;
 
 // DO NOT create this in the header! Put it in the main CPP file.
 #define IMPLEMENT_ENGINE_CLASS(ClassName) \
-    extern ClassTable g_ClassTable; \
+    \
+    namespace classtable { \
+        extern ClassTable g_ClassTable; \
+    }\
     \
     static EngineClass g_##ClassName##_ClassReg( \
             #ClassName,  \
-            &ClassTable g_ClassTable \
+            &classtable::g_ClassTable \
     ); \
     \
 	EngineClass* ClassName::getEngineClass() {return &g_##ClassName##_ClassReg;} \

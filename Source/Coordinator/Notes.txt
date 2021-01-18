@@ -1,0 +1,7 @@
+=============== Copyright Connor McLaughlan, All rights reserved. =============
+
+- g_Coordinator, located in the coordinator namespace, will be used to 
+    access the EntityManager, ComponentManager, and SystemManager
+
+- The global coordinator will be used to register entities, components, and
+    systems.

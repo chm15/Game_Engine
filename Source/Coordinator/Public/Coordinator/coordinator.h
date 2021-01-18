@@ -23,7 +23,9 @@ public:
 public:
     Coordinator();
 
+    template<typename T>
     void registerComponent();
+
     void registerSystem();
 };
 
