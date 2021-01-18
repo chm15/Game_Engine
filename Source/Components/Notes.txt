@@ -31,3 +31,15 @@ Registration of Components and Entities:
         which components need to be instantiated upon the creation of a new
         entity. The entity itself should only contain an id (uint/ulong).
 
+
+ComponentManager:
+    - Any components that are registered with the component manager
+        should have alrady been registered with the engine's class
+        table.
+
+    - For good measure, it should be asserted that the component is already
+        registered with the classtable.
+
+
+TODO:
+    - Implement assert for components.
