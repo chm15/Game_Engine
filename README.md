@@ -10,3 +10,12 @@ cd Build
 cmake ../
 make
 ```
+
+## Testing
+
+From the base directory:
+``` shell
+cd Build
+cmake ../
+make test
+```
