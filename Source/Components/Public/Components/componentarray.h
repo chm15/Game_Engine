@@ -12,9 +12,10 @@
 
 #define MAX_COMPONENTS 64
 
+class BaseComponentArray {};
 
 template<typename T>
-class ComponentArray {
+class ComponentArray : public BaseComponentArray {
 public:
     ComponentArray() {}
 
@@ -28,3 +29,5 @@ private:
     std::unordered_map<Entity, int> entityToIndexMap;
     std::unordered_map<int, Entity> indexToEntityMap;
 };
+
+
