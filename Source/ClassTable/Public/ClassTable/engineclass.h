@@ -8,6 +8,7 @@
 #ifndef ENGINE_CLASS_H
 #define ENGINE_CLASS_H
 
+#include <vector>
 #include "classtable.h"
 
 class EngineClass {
@@ -15,8 +16,22 @@ public:
     const char *networkName;
     ClassTable *table;
 
+    std::vector<EngineClass *> engineClasses;
+
+    void init() {
+        for (EngineClass* ptr : engineClasses) {
+            ptr->instantiate();
+        }
+    }
+
+    // Used to provide instantiation in a non-global scope.
+    // Should be called from main at the start of the program.
+    virtual void instantiate() {}
+
 public:
-    EngineClass(const char* pNetworkName, ClassTable *pTable) : networkName(pNetworkName), table(pTable) { }
+    EngineClass(const char* pNetworkName, ClassTable *pTable) : networkName(pNetworkName), table(pTable) {
+        this->engineClasses.push_back(this);
+    }
 };
 
 #endif

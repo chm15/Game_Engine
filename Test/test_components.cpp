@@ -70,8 +70,16 @@ void componentarray_test() {
 
 
 int main () {
-    //componentmanager_test();
-    //componentarray_test();
+
+    // ===================================
+    // MUST BE CALLED AT START OF PROGRAM!
+    EngineClass::init();
+    // ===================================
+
+
+
+    componentmanager_test();
+    componentarray_test();
     
     return 0;
 }
