@@ -36,9 +36,7 @@ jobs:
       working-directory: ${{github.workspace}}/Build
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
-      run: |
-          cd Build/
-          cmake ../
+      run: cmake ../
 
     - name: Test
       working-directory: ${{github.workspace}}/Build
@@ -46,7 +44,6 @@ jobs:
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: |
-          cd Build/
-          cmake ../
-          make test
+        cmake ../
+        make test
       
