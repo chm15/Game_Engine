@@ -1,4 +1,4 @@
-# Game Engine
+# Game Engine  ![Build](https://github.com/chm15/Game_Engine/workflows/CMake/badge.svg)
 
 This is an entity-component-system based multiplayer game engine.
   
@@ -17,6 +17,7 @@ Run unit-tests:
 # From the base directory:
 cd Build
 cmake ../
+make
 make test
 ```
 
