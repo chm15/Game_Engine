@@ -4,26 +4,35 @@ This is an entity-component-system based multiplayer game engine.
   
 ## Building
 
-From the base directory:
 ``` shell
+# From the base directory:
 cd Build
 cmake ../
 make
 ```
 
 ## Testing
-
-From the base directory:
+Run unit-tests:
 ``` shell
+# From the base directory:
 cd Build
 cmake ../
 make test
 ```
 
+Debug a specific unit-test:
+``` shell
+# From the base directory:
+cd Build
+cmake ../ -DCMAKE_BUILD_TYPE=Debug
+make
+gdb Test/test_[SOME UNIT TEST]
+```
+
 ## Build Documentation
 
 Python is required. This will make a text file in the base directory called "Documentation.txt".  
-From the base directory:
 ``` shell
+# From the base directory:
 python MakeDocumentation.py
 ```
