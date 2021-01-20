@@ -1,5 +1,14 @@
 =============== Copyright Connor McLaughlan, All rights reserved. =============
 
+Initialization:
+
+    - EngineClass::init() must be called before any of the registered
+        EngineClasses can be used!
+
+    - EngineClass has a virtual member initialization() that can be overridden
+        in subclasses to avoid constructor fights amongst globals.
+    
+
 Naming conventions:
     Class members:
         - Don't use m_genericMember; use this->genericMember where possible.
@@ -15,6 +24,7 @@ Naming conventions:
 
 
 Subsystems:
+
     - Systems should have an abstract interface declared in a .h file.
     - Should use a global variable declared in a .cpp file for each system.
     - Source Engine: 
