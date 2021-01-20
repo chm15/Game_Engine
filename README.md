@@ -17,6 +17,7 @@ Run unit-tests:
 # From the base directory:
 cd Build
 cmake ../
+make
 make test
 ```
 
