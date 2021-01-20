@@ -5,6 +5,8 @@
 //
 //=============================================================================
 
+#pragma once
+
 #include <string>
 #include <iostream>
 #include <memory>
@@ -24,7 +26,9 @@ public:
     Coordinator();
 
     template<typename T>
-    void registerComponent();
+    void registerComponent() {
+        this->componentManager->registerComponent<T>();
+    }
 
     void registerSystem();
 };

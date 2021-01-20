@@ -12,6 +12,5 @@
 #include "enginecomponent.h"
 
 #define IMPLEMENT_ENGINE_COMPONENT(ClassName) \
-    IMPLEMENT_ENGINE_CLASS_WITH_TYPE(ClassName, EngineComponent)
+    IMPLEMENT_ENGINE_CLASS_WITH_TYPE(ClassName, EngineComponent<ClassName>)
 
-#endif

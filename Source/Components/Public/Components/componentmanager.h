@@ -24,7 +24,6 @@ public:
         // table first.
         int classID = T::classID;
 
-
         this->componentArrays.insert(
                 {classID, std::make_shared<ComponentArray<T>>()}
                 );
@@ -45,7 +44,7 @@ public:
     ComponentManager() = default;
 
     // Maps from classID to ComponentArray
-    std::unordered_map<int, std::shared_ptr<BaseComponentArray> > componentArrays;
+    std::unordered_map<int, std::shared_ptr<BaseComponentArray> > componentArrays{};
 
 
     // Helper function for getting component array.
@@ -112,14 +111,11 @@ private:
 int main() {
 
     std::unordered_map<int, std::shared_ptr<BaseClsArray> > clsArrays{};
+    
 
     clsArrays.insert({1, std::make_shared<ClsArray<Cls1>>(3)});
-    //clsArrays.insert({2, std::make_shared< ClsArray<Cls2> >(3) });
-    
-    //std::shared_ptr<BaseClsArray> shrd = std::static_pointer_cast<BaseClsArray>(std::make_shared<ClsArray<Cls1>>(3));
 
 
-    //clsArrays[1].getCls[1].print("YUP");
 
     return 0;
 }

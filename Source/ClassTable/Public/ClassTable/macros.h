@@ -5,8 +5,7 @@
 //
 //=============================================================================
 
-#ifndef MACROS_H
-#define MACROS_H
+#pragma once
 
 #include <string>
 #include "classtable.h"
@@ -15,6 +14,26 @@
 
 int CURRENT_CLASS_ID = 0;
 
+
+
+#define IMPLEMENT_ENGINE_CLASS_WITH_TYPE_TEMPLATED(ClassName, ClassReg) \
+    \
+    namespace classtable { \
+        extern ClassTable g_ClassTable; \
+    }\
+    \
+    static ClassReg<ClassName> g_##ClassName##_ClassReg( \
+            #ClassName, \
+            &classtable::g_ClassTable \
+            ); \
+    \
+    EngineClass* ClassName::getEngineClass() {return &g_##ClassName##_ClassReg;} \
+    ClassTable *ClassName::classTable = &classtable::g_ClassTable;\
+    int ClassName::YouForgotToImplementOrDeclareServerClass() {return 0;} \
+    \
+    const std::string ClassName::classname = #ClassName; \
+    const int ClassName::classID = CURRENT_CLASS_ID++
+    
 
 
 // Use to register class with EngineClass or subclass of EngineClass
@@ -29,7 +48,7 @@ int CURRENT_CLASS_ID = 0;
             &classtable::g_ClassTable \
     ); \
     \
-	ClassReg* ClassName::getEngineClass() {return &g_##ClassName##_ClassReg;} \
+	EngineClass* ClassName::getEngineClass() {return &g_##ClassName##_ClassReg;} \
 	ClassTable *ClassName::classTable = &classtable::g_ClassTable;\
 	int ClassName::YouForgotToImplementOrDeclareServerClass() {return 0;} \
     \
@@ -81,4 +100,3 @@ int CURRENT_CLASS_ID = 0;
 #define DECLARE_ENGINE_SYSTEM()
 
 
-#endif

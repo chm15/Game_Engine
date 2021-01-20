@@ -19,11 +19,15 @@ namespace coordinator {
 
 // Templated so component class can be used to allocate space in the component
 // manager.
+/*
+ * :param T Component to be registered.
+ * :param pNetworkName std::string The name of the Component.
+ * :param *pTable ClassTable The global class table to register with.
+ */
 template<typename T>
-class EngineComponent : EngineClass {
+class EngineComponent : public EngineClass {
 public:
-    EngineComponent(const char* pNetworkName, ClassTable *pTable) {
-        EngineClass(pNetworkName, pTable);
+    EngineComponent(const char* pNetworkName, ClassTable *pTable) : EngineClass(pNetworkName, pTable) {
 
         // Get global Coordinator (coordinator::gCoordinator) and add component
         coordinator::g_Coordinator.registerComponent<T>();

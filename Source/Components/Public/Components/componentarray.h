@@ -12,22 +12,33 @@
 
 #define MAX_COMPONENTS 64
 
-class BaseComponentArray {};
+#define EntityID int
+
+class BaseComponentArray {
+public:
+    virtual int size() = 0;
+    // The virtual destructor MUST be declared.
+    // https://stackoverflow.com/questions/3065154/undefined-reference-to-vtable
+    virtual ~BaseComponentArray() = default;  // Has to be implemented
+};
 
 template<typename T>
 class ComponentArray : public BaseComponentArray {
 public:
-    ComponentArray() {}
+    int size() override {
+        return arraySize;
+    }
 
 private:
     // Size of component array
-    int size = 0;
+    int arraySize = 0;
 
     std::array<T, MAX_COMPONENTS> componentArray;
 
     // Maps between entities and indices
-    std::unordered_map<Entity, int> entityToIndexMap;
-    std::unordered_map<int, Entity> indexToEntityMap;
+    // Use the entitie's ID for the first key (int)
+    std::unordered_map<EntityID, int> entityToIndexMap;
+    std::unordered_map<int, EntityID> indexToEntityMap;
 };
 
 
