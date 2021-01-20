@@ -16,10 +16,10 @@ public:
     const char *networkName;
     ClassTable *table;
 
-    std::vector<EngineClass *> engineClasses;
+    static std::vector<EngineClass *> engineClasses;
 
-    void init() {
-        for (EngineClass* ptr : engineClasses) {
+    static void init() {
+        for (EngineClass* ptr : EngineClass::engineClasses) {
             ptr->instantiate();
         }
     }

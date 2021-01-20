@@ -41,10 +41,9 @@ IMPLEMENT_ENGINE_COMPONENT(ExampleComponent);
 
 //=============== TESTS =======================
 
-
 void componentmanager_test() {
     Coordinator& exampleCoordinator = coordinator::g_Coordinator;
-    ComponentManager exampleComponentManager = (*coordinator::g_Coordinator.componentManager);
+    ComponentManager& exampleComponentManager = *(coordinator::g_Coordinator.componentManager);
 
     exampleComponentManager.registerComponent<ExampleComponent>();
 
@@ -52,7 +51,7 @@ void componentmanager_test() {
 
     int arraySize = (exampleComponentManager.componentArrays[classID])->size();
 
-    TEST_ASSERT_EQUAL( arraySize, 1 );
+    TEST_ASSERT_EQUAL( arraySize, 0 );
 }
 
 
