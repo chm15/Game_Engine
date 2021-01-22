@@ -77,8 +77,8 @@ int main () {
 
 
 
-    componentmanager_test();
     componentarray_test();
+    componentmanager_test();
     
     return 0;
 }

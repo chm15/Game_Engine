@@ -23,6 +23,11 @@ public:
         this->systems.insert({T::classID, std::make_shared<T>()});
         return;
     }
+
+    std::shared_ptr<System> getSystem(ClassID ID) {
+        return this->systems[ID];
+    }
+
 private:
     std::unordered_map<ClassID, std::shared_ptr<System>> systems {};
 };

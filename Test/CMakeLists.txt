@@ -16,3 +16,9 @@ add_executable( test_components test_components.cpp )
 add_test( components test_components )
 
 target_link_libraries(test_components ClassTable Components Coordinator)
+
+# Systems
+add_executable( test_systems test_systems.cpp )
+add_test( systems test_systems )
+
+target_link_libraries(test_systems ClassTable Systems Coordinator)

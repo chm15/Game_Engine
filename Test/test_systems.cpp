@@ -10,7 +10,8 @@
 #include "testing/macros.h"
 
 #include <ClassTable/macros.h>
-#include <Systems/componentmanager.h>
+#include <Systems/systemmanager.h>
+#include <Systems/enginesystem.h>
 #include <Systems/macros.h>
 #include <Coordinator/coordinator.h>
 
@@ -24,11 +25,19 @@ namespace coordinator {
 }
 
 
+// Global variable ONLY FOR TESTING!
+bool didUpdate = false;
 
 
 // Set up system (Normally declare in the h file)
-class SystemExample : System {
+class SystemExample : public System {
+public:
     DECLARE_ENGINE_CLASS();
+public:
+    void update() override {
+        didUpdate = true;
+        return;
+    }
 };
 
 // Normally declare in the cpp file
@@ -49,7 +58,11 @@ void systemmanager_test() {
     exampleSystemManager.registerSystem<SystemExample>();
 
     int classID = SystemExample::classID;
+    std::shared_ptr<System> sysObject = (exampleSystemManager.getSystem(classID));
 
+    sysObject->update();
+
+    TEST_ASSERT_THROW(didUpdate);
 }
 
 
@@ -65,9 +78,8 @@ int main () {
     // ===================================
 
 
+    systemmanager_test();
 
-    componentmanager_test();
-    componentarray_test();
     
     return 0;
 }

@@ -8,6 +8,9 @@
 
 
 class System {
-    virtual void update();
+public:
+    virtual void update() = 0;
+
+    virtual ~System() = default;
 };
 
