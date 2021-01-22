@@ -10,6 +10,7 @@
 class Entity {
 public:
     Entity(int _id) : id(_id) {};
+    Entity() = default;
 
 private:
     int id;

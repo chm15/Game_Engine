@@ -4,10 +4,31 @@
 //
 //=============================================================================
 
-#ifndef ENTITY_MANAGER_H
-#define ENTITY_MANAGER_H
+#include <iostream>
+#include "entity.h"
 
-class EntityManager {};
+#pragma once
+
+#define MAX_ENTITIES 420
 
 
-#endif
+class EntityManager {
+public:
+    EntityManager() = default;
+    void create() {
+        // Will create a new Entity with local ID.
+        if (totalEntities < MAX_ENTITIES) {
+            entities[totalEntities] = Entity(totalEntities);
+            ++totalEntities;
+        } else {
+            std::cout << "\n\nMAX ENTITIES REACHED!\n\n" << std::endl;
+        }
+        return;
+    }
+
+private:
+    int totalEntities = 0;
+    Entity entities[MAX_ENTITIES];
+};
+
+

@@ -1,14 +1,10 @@
 //============= Copyright Connor McLaughlan, All rights reserved. =============
 //
-//  Purpose: Used to register a Engine Component, which can be sent over
-//      networks, and is allocated space in the engine's component manager.
-//
-//      This is strictly used by macros.
+//  Purpose: Used to track entities.
 //
 //=============================================================================
 
-#ifndef ENGINE_COMPONENT_H
-#define ENGINE_COMPONENT_H
+#pragma once
 
 #include "ClassTable/engineclass.h"
 #include "ClassTable/macros.h"
@@ -18,14 +14,8 @@ namespace coordinator {
     extern Coordinator g_Coordinator;
 }
 
-
-// Templated so component class can be used to allocate space in the component
-// manager.
 /*
- * :param T Component to be registered.
- * :param pNetworkName std::string The name of the Component.
- * :param *pTable ClassTable The global class table to register with.
- */
+
 template<typename T>
 class EngineComponent : public EngineClass {
 public:
@@ -43,4 +33,4 @@ public:
 
 };
 
-#endif
+*/
