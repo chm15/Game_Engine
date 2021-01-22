@@ -30,6 +30,9 @@ public:
         this->componentManager->registerComponent<T>();
     }
 
-    void registerSystem();
+    template<typename T>
+    void registerSystem() {
+        this->systemManager->registerSystem<T>();
+    }
 };
 

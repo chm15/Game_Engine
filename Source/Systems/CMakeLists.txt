@@ -15,3 +15,5 @@ target_include_directories( ${PROJECT_NAME}
     PUBLIC ${PROJECT_SOURCE_DIR}/Public
     PRIVATE ${PROJECT_SOURCE_DIR}/Public/${PROJECT_NAME}
 )
+
+target_link_libraries(Systems ClassTable Coordinator)
