@@ -15,6 +15,7 @@ class EngineClass {
 public:
     const char *networkName;
     ClassTable *table;
+    int classID;
 
     static std::vector<EngineClass *> engineClasses;
 
@@ -24,12 +25,18 @@ public:
         }
     }
 
+    void registerEngineClass() {
+        //table->registerClass(networkName, classID);
+        return;
+    }
+
     // Used to provide instantiation in a non-global scope.
     // Should be called from main at the start of the program.
     virtual void instantiate() {}
 
 public:
-    EngineClass(const char* pNetworkName, ClassTable *pTable) : networkName(pNetworkName), table(pTable) {
+    EngineClass(const char* pNetworkName, ClassTable *pTable, int _classID) : 
+        networkName(pNetworkName), table(pTable), classID(_classID) {
         this->engineClasses.push_back(this);
     }
 };

@@ -8,10 +8,19 @@
 #ifndef CLASS_TABLE_H
 #define CLASS_TABLE_H
 
+#include <unordered_map>
+#include <string>
+
+
 class ClassTable {
 public:
     ClassTable() {}
+    void registerClass(std::string classString, int classID) {
+        this->classStringToClassID.emplace(classString, classID);
+    }
 
+private:
+    std::unordered_map<std::string, int> classStringToClassID;
 
 };
 

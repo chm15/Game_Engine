@@ -10,6 +10,7 @@
 #include "Entities/entitymanager.h"
 #include "Components/componentmanager.h"
 #include "Systems/systemmanager.h"
+#include <Entities/entityregistry.h>
 
 
 // GLOBAL VARIABLES:
@@ -23,5 +24,6 @@ Coordinator::Coordinator() {
     this->entityManager = std::make_unique<EntityManager>();
     this->componentManager = std::make_unique<ComponentManager>();
     this->systemManager = std::make_unique<SystemManager>();
+    this->entityRegistry= std::make_unique<EntityRegistry>();
 }
 

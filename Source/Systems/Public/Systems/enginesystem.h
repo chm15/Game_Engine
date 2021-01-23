@@ -26,7 +26,7 @@ namespace coordinator {
 template<typename T>
 class EngineSystem : public EngineClass {
 public:
-    EngineSystem(const char* pNetworkName, ClassTable *pTable) : EngineClass(pNetworkName, pTable) {}
+    EngineSystem(const char* pNetworkName, ClassTable *pTable, int _classID) : EngineClass(pNetworkName, pTable, _classID) {}
 
     void instantiate() override {
         // EngineClass::init() MUST BE CALLED AT START OF PROGRAM!

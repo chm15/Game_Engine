@@ -13,6 +13,7 @@
 #include "Entities/entitymanager.h"
 #include "Components/componentmanager.h"
 #include "Systems/systemmanager.h"
+#include "Entities/entityregistry.h"
 
 
 class Coordinator {
@@ -21,6 +22,7 @@ public:
     std::unique_ptr<EntityManager> entityManager;
     std::unique_ptr<ComponentManager> componentManager;
     std::unique_ptr<SystemManager> systemManager;
+    std::unique_ptr<EntityRegistry> entityRegistry;
 
 public:
     Coordinator();

@@ -29,7 +29,7 @@ namespace coordinator {
 template<typename T>
 class EngineComponent : public EngineClass {
 public:
-    EngineComponent(const char* pNetworkName, ClassTable *pTable) : EngineClass(pNetworkName, pTable) {
+    EngineComponent(const char* pNetworkName, ClassTable *pTable, int _classID) : EngineClass(pNetworkName, pTable, _classID) {
 
     }
 

@@ -15,7 +15,7 @@
 int CURRENT_CLASS_ID = 0;
 
 
-
+// ClassReg is the registry to be used.
 #define IMPLEMENT_ENGINE_CLASS_WITH_TYPE_TEMPLATED(ClassName, ClassReg) \
     \
     namespace classtable { \
@@ -24,7 +24,8 @@ int CURRENT_CLASS_ID = 0;
     \
     static ClassReg<ClassName> g_##ClassName##_ClassReg( \
             #ClassName, \
-            &classtable::g_ClassTable \
+            &classtable::g_ClassTable, \
+            ClassName::classID \
             ); \
     \
     EngineClass* ClassName::getEngineClass() {return &g_##ClassName##_ClassReg;} \
@@ -36,6 +37,7 @@ int CURRENT_CLASS_ID = 0;
     
 
 
+// ClassReg is the registry to be used.
 // Use to register class with EngineClass or subclass of EngineClass
 #define IMPLEMENT_ENGINE_CLASS_WITH_TYPE(ClassName, ClassReg) \
     \
@@ -45,7 +47,8 @@ int CURRENT_CLASS_ID = 0;
     \
     static ClassReg g_##ClassName##_ClassReg( \
             #ClassName,  \
-            &classtable::g_ClassTable \
+            &classtable::g_ClassTable, \
+            ClassName::classID \
     ); \
     \
 	EngineClass* ClassName::getEngineClass() {return &g_##ClassName##_ClassReg;} \
