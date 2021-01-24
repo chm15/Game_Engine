@@ -63,6 +63,13 @@ void componentarray_test() {
 }
 
 
+void component_classID_test() {
+    ExampleComponent obj;
+    int g_classID = obj.getEngineClass()->classID;
+    int classID = ExampleComponent::classID;
+    TEST_ASSERT_EQUAL( g_classID, classID);
+    return;
+}
 
 
 
@@ -79,6 +86,7 @@ int main () {
 
     componentarray_test();
     componentmanager_test();
+    component_classID_test();
     
     return 0;
 }

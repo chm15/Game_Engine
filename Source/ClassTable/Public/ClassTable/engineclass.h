@@ -5,11 +5,12 @@
 //
 //=============================================================================
 
-#ifndef ENGINE_CLASS_H
-#define ENGINE_CLASS_H
+#pragma once
 
 #include <vector>
 #include "classtable.h"
+
+#include <iostream>
 
 class EngineClass {
 public:
@@ -37,8 +38,11 @@ public:
 public:
     EngineClass(const char* pNetworkName, ClassTable *pTable, int _classID) : 
         networkName(pNetworkName), table(pTable), classID(_classID) {
-        this->engineClasses.push_back(this);
+        //this->engineClasses.push_back(this);
+        EngineClass::engineClasses.push_back(this);
+        std::cout << "EngineClass constructor called for " << pNetworkName << std::endl;
+        std::cout << "Total EngineClasses from " << pNetworkName << " " << this->engineClasses.size() <<std::endl;
+
     }
 };
 
-#endif

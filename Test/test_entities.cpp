@@ -9,12 +9,15 @@
 
 #include "testing/macros.h"
 
+#include <iostream>
+
 #include <ClassTable/macros.h>
 #include <Components/componentmanager.h>
 #include <Components/componentarray.h>
 #include <Components/macros.h>
 #include <Coordinator/coordinator.h>
 #include <Entities/entityregistry.h>
+#include <Entities/engineentity.h>
 #include <Entities/macros.h>
 
 
@@ -30,7 +33,7 @@ namespace coordinator {
 
 
 // Set up components 
-struct Componentt1 {
+struct Component1 {
     DECLARE_ENGINE_CLASS();
 };
 IMPLEMENT_ENGINE_COMPONENT(Component1);
@@ -43,11 +46,11 @@ IMPLEMENT_ENGINE_COMPONENT(Component2);
 
 struct Entity1 {
     DECLARE_ENGINE_CLASS();
-}
-IMPLEMENT_ENGINE_CLASS(Entity1);
-REGISTER_ENTITY(Entity1::classID, 
-        Component1,
-        Component2
+};
+//IMPLEMENT_ENGINE_CLASS(Entity1);
+IMPLEMENT_ENGINE_ENTITY(Entity1, 
+        Component1::classID,
+        Component2::classID
         );
 
 
@@ -56,15 +59,17 @@ REGISTER_ENTITY(Entity1::classID,
 
 void entityregistry_test() {
     Coordinator& exampleCoordinator = coordinator::g_Coordinator;
-    ComponentManager& exampleComponentManager = *(coordinator::g_Coordinator.componentManager);
+    EntityRegistry& entityRegistry = *(coordinator::g_Coordinator.entityRegistry);
 
-    exampleComponentManager.registerComponent<ExampleComponent>();
+    int classID = Entity1::classID;
 
-    int classID = ExampleComponent::classID;
+    std::vector<int> compCID = entityRegistry.getEntity(classID);
 
-    int arraySize = (exampleComponentManager.componentArrays[classID])->size();
+    std::cout << compCID.size() << std::endl;
 
-    TEST_ASSERT_EQUAL( arraySize, 0 );
+    //TEST_ASSERT_EQUAL(compCID[0], Component1::classID);
+    //TEST_ASSERT_EQUAL(compCID[1], Component2::classID);
+    return;
 }
 
 
@@ -77,9 +82,11 @@ int main () {
     // ===================================
     // MUST BE CALLED AT START OF PROGRAM!
     EngineClass::init();
+    std::cout << "TOTAL ENGINECLASSES: " << EngineClass::engineClasses.size() << std::endl;
     // ===================================
 
 
+    entityregistry_test();
 
     
     return 0;

@@ -7,17 +7,14 @@
 
 #pragma once
 
-#include <ClassTable/macros.h>
 #include <Coordinator/coordinator.h>
+#include <ClassTable/macros.h>
+#include "entityregistry.h"
+#include "engineentity.h"
 
-//#define IMPLEMENT_ENGINE_COMPONENT(ClassName) \
-//    IMPLEMENT_ENGINE_CLASS_WITH_TYPE(ClassName, EngineComponent<ClassName>)
 
-
-#define REGISTER_ENTITY(entity_classID, component_classIDs...) \
-    namespace coordinator {     \
-        extern g_Coordinator;   \
-    }                           \
-    coordinator::g_Coordinator.entityRegistry->registerEntity(entity_classID, std::vector(component_classIDs))
+// THIS ISN'T WORKING BECAUsE IT'S IN THE GLOBAL NAMESPACE!
+#define IMPLEMENT_ENGINE_ENTITY(ClassName, component_classIDs...) \
+    IMPLEMENT_ENGINE_CLASS_WITH_TYPE_AND_ARGS(ClassName, EngineEntity<ClassName>, component_classIDs) \
 
 

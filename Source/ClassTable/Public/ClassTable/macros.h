@@ -36,6 +36,31 @@ int CURRENT_CLASS_ID = 0;
     const int ClassName::classID = CURRENT_CLASS_ID++
     
 
+// ClassReg is the registry to be used.
+// Use to register class with EngineClass or subclass of EngineClass. 
+//
+// Extra arguments can be provided.
+#define IMPLEMENT_ENGINE_CLASS_WITH_TYPE_AND_ARGS(ClassName, ClassReg, args...) \
+    \
+    namespace classtable { \
+        extern ClassTable g_ClassTable; \
+    }\
+    \
+    static ClassReg g_##ClassName##_ClassReg( \
+            #ClassName,  \
+            &classtable::g_ClassTable, \
+            ClassName::classID, \
+            args \
+    ); \
+    \
+	EngineClass* ClassName::getEngineClass() {return &g_##ClassName##_ClassReg;} \
+	ClassTable *ClassName::classTable = &classtable::g_ClassTable;\
+	int ClassName::YouForgotToImplementOrDeclareServerClass() {return 0;} \
+    \
+    /* Patchy solution. will probably be removed. */ \
+    const std::string ClassName::className = #ClassName; \
+    const int ClassName::classID = CURRENT_CLASS_ID++
+
 
 // ClassReg is the registry to be used.
 // Use to register class with EngineClass or subclass of EngineClass
@@ -70,6 +95,10 @@ int CURRENT_CLASS_ID = 0;
     virtual int YouForgotToImplementOrDeclareServerClass()
 
 
+#define IMPLEMENT_ENGINE_CLASS(ClassName) \
+    IMPLEMENT_ENGINE_CLASS_WITH_TYPE(ClassName, EngineClass)
+
+
 //
 //// DO NOT create this in the header! Put it in the main CPP file.
 //#define IMPLEMENT_ENGINE_CLASS(ClassName) \
@@ -94,12 +123,7 @@ int CURRENT_CLASS_ID = 0;
 
 // The classtable::g_ClassTable refers to the global ClassTable in the classtable namespace
 
-#define IMPLEMENT_ENGINE_CLASS(ClassName) \
-    IMPLEMENT_ENGINE_CLASS_WITH_TYPE(ClassName, EngineClass)
 
 
-#define DECLARE_ENGINE_ENTITY()
-#define DECLARE_ENGINE_COMPONENT()
-#define DECLARE_ENGINE_SYSTEM()
 
 

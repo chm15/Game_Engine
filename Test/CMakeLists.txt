@@ -22,3 +22,9 @@ add_executable( test_systems test_systems.cpp )
 add_test( systems test_systems )
 
 target_link_libraries(test_systems ClassTable Systems Coordinator)
+
+# Entities
+add_executable( test_entities test_entities.cpp )
+add_test( entities test_entities )
+
+target_link_libraries(test_entities ClassTable Systems Coordinator Entities)
