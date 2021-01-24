@@ -18,6 +18,9 @@ int CURRENT_CLASS_ID = 0;
 // ClassReg is the registry to be used.
 #define IMPLEMENT_ENGINE_CLASS_WITH_TYPE_TEMPLATED(ClassName, ClassReg) \
     \
+    const std::string ClassName::classname = #ClassName; \
+    const int ClassName::classID = CURRENT_CLASS_ID++; \
+    \
     namespace classtable { \
         extern ClassTable g_ClassTable; \
     }\
@@ -29,11 +32,8 @@ int CURRENT_CLASS_ID = 0;
             ); \
     \
     EngineClass* ClassName::getEngineClass() {return &g_##ClassName##_ClassReg;} \
-    ClassTable *ClassName::classTable = &classtable::g_ClassTable;\
     int ClassName::YouForgotToImplementOrDeclareServerClass() {return 0;} \
-    \
-    const std::string ClassName::classname = #ClassName; \
-    const int ClassName::classID = CURRENT_CLASS_ID++
+    ClassTable *ClassName::classTable = &classtable::g_ClassTable
     
 
 // ClassReg is the registry to be used.
@@ -67,6 +67,9 @@ int CURRENT_CLASS_ID = 0;
 // Use to register class with EngineClass or subclass of EngineClass
 #define IMPLEMENT_ENGINE_CLASS_WITH_TYPE(ClassName, ClassReg) \
     \
+    const std::string ClassName::className = #ClassName; \
+    const int ClassName::classID = CURRENT_CLASS_ID++; \
+    \
     namespace classtable { \
         extern ClassTable g_ClassTable; \
     }\
@@ -80,12 +83,8 @@ int CURRENT_CLASS_ID = 0;
     ); \
     \
 	EngineClass* ClassName::getEngineClass() {return &g_##ClassName##_ClassReg;} \
-	ClassTable *ClassName::classTable = &classtable::g_ClassTable;\
 	int ClassName::YouForgotToImplementOrDeclareServerClass() {return 0;} \
-    \
-    /* Patchy solution. will probably be removed. */ \
-    const std::string ClassName::className = #ClassName; \
-    const int ClassName::classID = CURRENT_CLASS_ID++
+	ClassTable *ClassName::classTable = &classtable::g_ClassTable
 
 
 
