@@ -8,29 +8,31 @@
 
 #pragma once
 
+#include <initializer_list>
 #include <vector>
 #include <ClassTable/engineclass.h>
 #include <ClassTable/macros.h>
 #include <Coordinator/coordinator.h>
 
+
 namespace coordinator {
     extern Coordinator g_Coordinator;
 }
 
-
 template<typename T>
 class EngineEntity : public EngineClass {
 public:
-    EngineEntity(const char* pNetworkName, ClassTable *pTable, int _classID, int _componentClassIDs...) 
+    EngineEntity(const char* pNetworkName, ClassTable *pTable, int _classID,
+            std::initializer_list<int> _componentClassIDs) 
         : EngineClass(pNetworkName, pTable, _classID), componentClassIDs(_componentClassIDs) { }
 
     void instantiate() override {
         // EngineClass::init() MUST BE CALLED AT START OF PROGRAM!
 
         // Get global Coordinator (coordinator::g_Coordinator)
-        Coordinator& coord = coordinator::g_Coordinator;
+        //Coordinator& coord = coordinator::g_Coordinator;
 
-        coord.entityRegistry->registerEntity(this->classID, std::vector<int>(componentClassIDs));
+        coordinator::g_Coordinator.entityRegistry->registerEntity(this->classID, componentClassIDs);
 
         return;
     }

@@ -40,26 +40,27 @@ int CURRENT_CLASS_ID = 0;
 // Use to register class with EngineClass or subclass of EngineClass. 
 //
 // Extra arguments can be provided.
-#define IMPLEMENT_ENGINE_CLASS_WITH_TYPE_AND_ARGS(ClassName, ClassReg, args...) \
+#define IMPLEMENT_ENGINE_CLASS_WITH_TYPE_AND_ARGS(ClassName, ClassReg, ...) \
+    \
+    const int ClassName::classID = CURRENT_CLASS_ID++; \
+    const std::string ClassName::className = #ClassName; \
     \
     namespace classtable { \
         extern ClassTable g_ClassTable; \
     }\
     \
+    extern int CURRENT_CLASS_ID; \
+    \
     static ClassReg g_##ClassName##_ClassReg( \
             #ClassName,  \
             &classtable::g_ClassTable, \
             ClassName::classID, \
-            args \
+            __VA_ARGS__ \
     ); \
     \
 	EngineClass* ClassName::getEngineClass() {return &g_##ClassName##_ClassReg;} \
-	ClassTable *ClassName::classTable = &classtable::g_ClassTable;\
 	int ClassName::YouForgotToImplementOrDeclareServerClass() {return 0;} \
-    \
-    /* Patchy solution. will probably be removed. */ \
-    const std::string ClassName::className = #ClassName; \
-    const int ClassName::classID = CURRENT_CLASS_ID++
+	ClassTable *ClassName::classTable = &classtable::g_ClassTable
 
 
 // ClassReg is the registry to be used.
@@ -69,6 +70,8 @@ int CURRENT_CLASS_ID = 0;
     namespace classtable { \
         extern ClassTable g_ClassTable; \
     }\
+    \
+    extern int CURRENT_CLASS_ID; \
     \
     static ClassReg g_##ClassName##_ClassReg( \
             #ClassName,  \

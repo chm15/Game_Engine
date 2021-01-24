@@ -10,8 +10,11 @@
 #include "testing/macros.h"
 
 #include <iostream>
+#include <vector>
 
 #include <ClassTable/macros.h>
+#include <ClassTable/engineclass.h>
+
 #include <Components/componentmanager.h>
 #include <Components/componentarray.h>
 #include <Components/macros.h>
@@ -30,6 +33,12 @@ namespace coordinator {
 }
 
 
+//////////////////////////////////////////////////////////////
+// I can't stress HOW IMPORTANT THIS LINE IS!
+// Without this line, the static member variable
+// EngineClass::engineClasses will be reinitialized to zero.
+extern std::vector<EngineClass *> EngineClass::engineClasses;
+//////////////////////////////////////////////////////////////
 
 
 // Set up components 
@@ -57,6 +66,18 @@ IMPLEMENT_ENGINE_ENTITY(Entity1,
 
 //=============== TESTS =======================
 
+void entityregistry_generic_test() {
+    EntityRegistry entreg;
+
+    std::vector<int> fakeComponentIDs = {1,3,4};
+
+    entreg.registerEntity(69, fakeComponentIDs);
+
+    std::vector<int> getComps = entreg.getEntity(69);
+    TEST_ASSERT_EQUAL(fakeComponentIDs[1], getComps[1]);
+    return;
+}
+
 void entityregistry_test() {
     Coordinator& exampleCoordinator = coordinator::g_Coordinator;
     EntityRegistry& entityRegistry = *(coordinator::g_Coordinator.entityRegistry);
@@ -67,8 +88,8 @@ void entityregistry_test() {
 
     std::cout << compCID.size() << std::endl;
 
-    //TEST_ASSERT_EQUAL(compCID[0], Component1::classID);
-    //TEST_ASSERT_EQUAL(compCID[1], Component2::classID);
+    TEST_ASSERT_EQUAL(compCID[0], Component1::classID);
+    TEST_ASSERT_EQUAL(compCID[1], Component2::classID);
     return;
 }
 
@@ -78,13 +99,13 @@ void entityregistry_test() {
 
 
 int main () {
-
     // ===================================
     // MUST BE CALLED AT START OF PROGRAM!
     EngineClass::init();
     std::cout << "TOTAL ENGINECLASSES: " << EngineClass::engineClasses.size() << std::endl;
     // ===================================
 
+    entityregistry_generic_test();
 
     entityregistry_test();
 

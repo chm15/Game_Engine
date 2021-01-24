@@ -24,6 +24,6 @@ Coordinator::Coordinator() {
     this->entityManager = std::make_unique<EntityManager>();
     this->componentManager = std::make_unique<ComponentManager>();
     this->systemManager = std::make_unique<SystemManager>();
-    this->entityRegistry= std::make_unique<EntityRegistry>();
+    this->entityRegistry = std::make_unique<EntityRegistry>();
 }
 

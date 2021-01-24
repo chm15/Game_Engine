@@ -16,7 +16,7 @@ class EngineClass {
 public:
     const char *networkName;
     ClassTable *table;
-    int classID;
+    int classID; // TODO: FOR SOME REASON THE CLASSID HERE IS ALWAYS 0.
 
     static std::vector<EngineClass *> engineClasses;
 
