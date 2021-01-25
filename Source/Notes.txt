@@ -37,3 +37,10 @@ Subsystems:
         as necessary." [https://developer.valvesoftware.com/wiki/Engine_Structure]
 
 
+Improvements:
+    - Each system should have an init() method where they have a chance to set
+        themselves/any external libraries up. The Game_Engine init() method
+        would be responsible for calling each system init methods as well
+        as the EngineClass init method.
+
+    - How to provide initial values to Entity blueprints?

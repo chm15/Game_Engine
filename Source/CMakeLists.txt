@@ -10,4 +10,6 @@ add_subdirectory(Networking)
 add_subdirectory(StateSync)
 add_subdirectory(Systems)
 add_subdirectory(Math)
+add_subdirectory(Engine)
+add_subdirectory(GameObject)
 

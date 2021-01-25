@@ -1,0 +1,5 @@
+=============== Copyright Connor McLaughlan, All rights reserved. =============
+
+GameObject:
+    - Used to make prebuilt objects associated with their own classIDs.
+    - Can specify init parameters for components.
