@@ -2,4 +2,10 @@
 
 GameObject:
     - Used to make prebuilt objects associated with their own classIDs.
+
     - Can specify init parameters for components.
+
+    - A good explanation on GameObjects 
+        [https://www.gamedev.net/tutorials/programming/general-and-gameplay-
+        programming/the-entity-component-system-bountyhunter-
+        game-part-2-r4804/]
