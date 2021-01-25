@@ -28,3 +28,9 @@ add_executable( test_entities test_entities.cpp )
 add_test( entities test_entities )
 
 target_link_libraries(test_entities ClassTable Systems Coordinator Entities)
+
+# Math
+add_executable( test_math test_math.cpp )
+add_test( math test_math )
+
+target_link_libraries(test_math Math)
