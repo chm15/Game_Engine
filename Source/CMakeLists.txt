@@ -9,4 +9,5 @@ add_subdirectory(Entities)
 add_subdirectory(Networking)
 add_subdirectory(StateSync)
 add_subdirectory(Systems)
+add_subdirectory(Math)
 
