@@ -1,8 +1,25 @@
+//============= Copyright Connor McLaughlan, All rights reserved. =============
+//
+//  Purpose: Main. Won't be included in Engine library.
+//
+//=============================================================================
+
 #include <iostream>
 
 
 
 int main() {
+    /*
+    How I would like to interact with the engine:
+
+    Engine engine;
+
+    engine.registerComponent<Mesh>();
+    engine.registerGameObject<Player>();
+
+    engine.addGameObject<Player>();
+    engine.addGameObject(Player::classID);
+    */
 
     return 0;
 }
