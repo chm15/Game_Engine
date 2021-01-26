@@ -4,11 +4,6 @@
 //
 //=============================================================================
 
-#include <unordered_map>
 #include "gameobject.h"
 
 
-
-namespace gameobject {
-    std::unordered_map<int,GameObjectInterface> g_GameObjectRegistry{};
-}

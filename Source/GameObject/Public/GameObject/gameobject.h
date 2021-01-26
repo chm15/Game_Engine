@@ -15,41 +15,14 @@
 
 
 
-class GameObjectInterface;
-
-
-namespace gameobject {
-    extern std::unordered_map<int,GameObjectInterface> g_GameObjectRegistry;
-}
-
-
-
-/*
- * Used to dynamically load GameObjects into the engine
- * from the global GameObjectRegistry.
- */
-class GameObjectInterface {
-public:
-    GameObjectInterface() = default;
-    virtual void load(ComponentManager& cm, int entityID) {}
-};
-
-
-
 /*
  * Used to create a prebuilt group of components
  */
-template<typename T>
-class GameObject : public GameObjectInterface {
-public:
-    //virtual ~GameObject() = default;
-
+class GameObject {
 public:
     GameObject() = default;
 
-    void instantiate() override {
-        gameobject::g_GameObjectRegistry.emplace(this->classID, T());
-    }
+    virtual void load(ComponentManager& cm, int entityID) {}
 };
 
 

@@ -44,3 +44,6 @@ Improvements:
         as the EngineClass init method.
 
     - How to provide initial values to Entity blueprints?
+
+    - Engine instantiation will work like this example:
+        [https://github.com/taurheim/NomadECS/blob/master/example/main.cpp]
