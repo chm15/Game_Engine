@@ -12,7 +12,6 @@
 #include <Entities/entity.h>
 #include <Components/componentmanager.h>
 #include <Systems/systemmanager.h>
-#include <Entities/entityregistry.h>
 
 
 /*

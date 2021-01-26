@@ -12,7 +12,6 @@
 #include <Entities/entitymanager.h>
 #include <Entities/entity.h>
 #include <Components/componentmanager.h>
-#include <ClassTable/iengineclass.h>
 
 
 
@@ -41,7 +40,7 @@ public:
  * Used to create a prebuilt group of components
  */
 template<typename T>
-class GameObject : public IEngineClass, public GameObjectInterface {
+class GameObject : public GameObjectInterface {
 public:
     //virtual ~GameObject() = default;
 
