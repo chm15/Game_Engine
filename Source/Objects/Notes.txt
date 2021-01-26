@@ -1,0 +1,3 @@
+=============== Copyright Connor McLaughlan, All rights reserved. =============
+
+- Used for loading 3d assets.
