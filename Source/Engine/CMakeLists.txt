@@ -1,6 +1,7 @@
 set(
     SOURCES 
         "Private/engine.cpp"
+        "Private/engineclass.cpp"
 )
 
 
