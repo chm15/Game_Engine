@@ -40,8 +40,6 @@ public:
         networkName(pNetworkName), table(pTable), classID(_classID) {
         //this->engineClasses.push_back(this);
         EngineClass::engineClasses.push_back(this);
-        std::cout << "EngineClass constructor called for " << pNetworkName << std::endl;
-        std::cout << "Total EngineClasses from " << pNetworkName << " " << this->engineClasses.size() <<std::endl;
 
     }
 };

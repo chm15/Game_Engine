@@ -2,6 +2,7 @@ set(
     SOURCES 
         "Private/classtable.cpp"
         "Private/engineclass.cpp"
+        "Private/iengineclass.cpp"
 )
 
 

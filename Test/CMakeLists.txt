@@ -34,3 +34,9 @@ add_executable( test_math test_math.cpp )
 add_test( math test_math )
 
 target_link_libraries(test_math Math)
+
+# GameObject
+add_executable( test_gameobject test_gameobject.cpp )
+add_test( gameobject test_gameobject)
+
+target_link_libraries(test_gameobject GameObject ClassTable)
