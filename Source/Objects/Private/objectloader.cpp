@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include <Math/vec.h>
 #include "objectloader.h"
+#include <assert.h>
 
 
 void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vector<int>& indexBuffer) {
@@ -27,6 +28,7 @@ void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vec
 
     std::string lineStr;
     std::ifstream inFile(filename);
+    assert(inFile.is_open());
 
     while (std::getline(inFile, lineStr)) {
         std::istringstream lineSS(lineStr);

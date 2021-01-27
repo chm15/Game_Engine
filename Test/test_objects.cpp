@@ -21,7 +21,10 @@ void objectloader_test() {
     std::vector<Vec3> vertexBuffer;
     std::vector<int> indexBuffer;
 
-    loadObjFile("AssetsTesting/cube.obj", vertexBuffer, indexBuffer);
+    loadObjFile("./AssetsTesting/cube.obj", vertexBuffer, indexBuffer);
+
+    TEST_ASSERT_EQUAL(indexBuffer[0], 1);  // These values are just hardcoded in from the .obj file.
+    TEST_ASSERT_EQUAL(indexBuffer[1], 2);
 
 
     return;
