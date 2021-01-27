@@ -1,34 +1,26 @@
 //============= Copyright Connor McLaughlan, All rights reserved. =============
 //
-//  Purpose: Engine class.
+//  Purpose: OpenGL backend.
 //
 //=============================================================================
 
 #pragma once
 
-#include <string>
-#include <iostream>
-#include <Entities/entitymanager.h>
-#include <Entities/entity.h>
-#include <Components/componentmanager.h>
-#include <Systems/systemmanager.h>
+#include <Systems/system.h>
 
 
-/*
- * The Engine class is used to do high level stuff.
- */
-class Engine {
+class OpeGLGraphicsSystem : public System {
 public:
-    void loadGameObject(int classID, int entityID) {
-        /*
-         * Loads GameObject using the GameObjects classID. The GameObject
-         * will be loaded with the provided entityID.
-         */
+    void update() override {
+        // Obtain all GameObjects with mesh components
         return;
     }
 
-public:
-    Engine() = default;
+private:
+    void draw();
+
+    void init() {
+        // Initializes OpenGL stuff.
+        return;
+    }
 };
-
-
