@@ -9,18 +9,12 @@
 #include <Systems/system.h>
 
 
-class OpeGLGraphicsSystem : public System {
+class OpenGLGraphicsSystem : public System {
 public:
-    void update() override {
-        // Obtain all GameObjects with mesh components
-        return;
-    }
+    OpenGLGraphicsSystem();
+    void update() override;
 
 private:
     void draw();
-
-    void init() {
-        // Initializes OpenGL stuff.
-        return;
-    }
+    void init();
 };
