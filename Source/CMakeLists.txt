@@ -11,4 +11,6 @@ add_subdirectory(Math)
 add_subdirectory(Engine)
 add_subdirectory(GameObject)
 add_subdirectory(Utils)
+add_subdirectory(Graphics)
+
 

@@ -25,3 +25,5 @@ add_subdirectory(Test)
 # Assets
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Source/Assets
     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+
