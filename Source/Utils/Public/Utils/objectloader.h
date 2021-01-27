@@ -10,6 +10,6 @@
 #include <Math/vec.h>
 
 
-void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vector<int>& indexBuffer);
+void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vector<unsigned int>& indexBuffer);
 
 

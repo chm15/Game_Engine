@@ -19,7 +19,7 @@
 
 void objectloader_test() {
     std::vector<Vec3> vertexBuffer;
-    std::vector<int> indexBuffer;
+    std::vector<unsigned int> indexBuffer;
 
     loadObjFile("../Assets/cube.obj", vertexBuffer, indexBuffer);
 

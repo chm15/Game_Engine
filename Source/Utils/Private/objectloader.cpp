@@ -15,7 +15,7 @@
 #include <assert.h>
 
 
-void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vector<int>& indexBuffer) {
+void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vector<unsigned int>& indexBuffer) {
     /* Loads the .obj file specified at the filename location.
      * This only works for triangles.
      */
@@ -63,7 +63,7 @@ void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vec
 
                 int v_index = atoi(v_index_str.c_str());
                 v_index  = (  v_index >= 0 ?  v_index : vertexBuffer.size() +  v_index );  // The index can be a negative value for back of array
-                indexBuffer.push_back(v_index);
+                indexBuffer.push_back((unsigned int)v_index);
                 //.push_back((int)t_index_str);  // NO USE FOR THIS YET!
                 //.push_back((int)n_index_str);  // NO USE FOR THIS YET!
             }
