@@ -5,6 +5,7 @@
 //=============================================================================
 
 #include <iostream>
+#include <OpenGL/graphics.h>
 
 
 
@@ -20,6 +21,7 @@ int main() {
     engine.addGameObject<Player>();
     engine.addGameObject(Player::classID);
     */
+    OpenGLGraphicsSystem gSystem();
 
     return 0;
 }
