@@ -13,8 +13,6 @@
 #include <Utils/objectloader.h>
 
 
-
-
 //=============== TESTS =======================
 
 void objectloader_test() {

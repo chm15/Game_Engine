@@ -9,10 +9,27 @@
 
 #include "testing/macros.h"
 
+#include <iostream>
 #include <Math/vec.h>
 
 
+
+struct TestVertex {
+    float x, y, z;
+};
+
+
 //=============== TESTS =======================
+
+
+void vec3size_test() {
+    Vec3 vec[10];
+    TestVertex vert[10];
+    std::cout << "Vertex size: " << sizeof(vert) << " Vec3 size: " << sizeof(vec) << std::endl;
+    TEST_ASSERT_EQUAL(sizeof(Vec3), sizeof(TestVertex));
+    return;
+}
+
 
 void vector_test() {
     Vec<float,3> vecTest;
@@ -32,12 +49,9 @@ void vector_test() {
 
 int main () {
 
-    // ===================================
-    // MUST BE CALLED AT START OF PROGRAM!
-    //EngineClass::init();
-    // ===================================
 
     vector_test();
+    vec3size_test();
 
 
     

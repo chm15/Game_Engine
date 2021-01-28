@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <array>
+#include <vector>
 #include <Math/vec.h>
 
 class Component {

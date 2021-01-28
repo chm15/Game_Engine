@@ -9,6 +9,7 @@
 #include <Systems/system.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <Components/components.h>
 
 
 class OpenGLGraphicsSystem : public System {
@@ -17,11 +18,11 @@ public:
     void update() override;
 
 private:
-    unsigned int vbo;
     unsigned int vao;
+    unsigned int vbo;
 
     GLFWwindow* window;
 
-    void draw();
+    void draw(Mesh& mesh);
     void init();
 };
