@@ -116,15 +116,26 @@ void OpenGLGraphicsSystem::init() {
         if(!success) {
             glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
             std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+            std::cout << vs << std::endl;
         }
     }
 
     //===== Fragment shader =====
     std::string fragmentShaderSource;
     loadShader("Assets/Shaders/fragment.glsl", fragmentShaderSource);
-    const char *fs = vertexShaderSource.data();
+    const char *fs = fragmentShaderSource.data();
     glShaderSource(this->fragmentShader, 1, &fs, NULL);
     glCompileShader(fragmentShader);
+    {  // error handling
+        int success;
+        char infoLog[512];
+        glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+        if(!success) {
+            glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+            std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+            std::cout << fs << std::endl;
+        }
+    }
 
     //===== Shader program =====
     glAttachShader(this->shaderProgram, this->vertexShader);

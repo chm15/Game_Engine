@@ -83,7 +83,7 @@ void loadShader(const char* filename, std::string &shaderStr) {
     assert(inFile.is_open());  // Shader file failed to open.
 
     while (std::getline(inFile, lineStr)) {
-        shaderStr += lineStr;
+        shaderStr += lineStr + "\n";
     }
     return;
 }
