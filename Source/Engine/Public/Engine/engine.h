@@ -12,6 +12,7 @@
 #include <Entities/entity.h>
 #include <Components/componentmanager.h>
 #include <Systems/systemmanager.h>
+#include <GameObject/gameobject.h>
 
 
 /*
@@ -19,13 +20,26 @@
  */
 class Engine {
 public:
-    void loadGameObject(int classID, int entityID) {
+    template<typename T>
+    void registerSystem() {
+        return;
+    }
+
+    template<typename T>
+    void registerComponent() {
+        return;
+    }
+
+    template<typename T>
+    void registerGameObject() {
+        return;
+    }
+
+    void loadGameObject(int classID, int entityID);
         /*
          * Loads GameObject using the GameObjects classID. The GameObject
          * will be loaded with the provided entityID.
          */
-        return;
-    }
 
 public:
     Engine() = default;

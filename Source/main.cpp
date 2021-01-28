@@ -5,15 +5,24 @@
 //=============================================================================
 
 #include <iostream>
+#include <Components/components.h>
+#include <GameObject/gameobject.h>
+#include <Engine/engine.h>
 #include <OpenGL/graphics.h>
 
+
+class Cube : GameObject<Cube> {
+public:
+    // Contains Mesh component
+    void load(ComponentManager& cm, int entityID);
+};
+    
 
 
 int main() {
     /*
     How I would like to interact with the engine:
 
-    Engine engine;
 
     engine.registerComponent<Mesh>();
     engine.registerGameObject<Player>();
@@ -21,7 +30,14 @@ int main() {
     engine.addGameObject<Player>();
     engine.addGameObject(Player::classID);
     */
-    OpenGLGraphicsSystem gl;
+
+    Engine engine;
+
+    engine.registerComponent<Mesh>();
+    //engine.registerComponent<Transform>();
+    engine.registerSystem<OpenGLGraphicsSystem>();
+    engine.registerGameObject<Cube>();
+
 
     int x;
     std::cin >> x;

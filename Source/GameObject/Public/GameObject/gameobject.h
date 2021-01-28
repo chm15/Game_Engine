@@ -11,6 +11,7 @@
 #include <iostream>
 #include <Entities/entitymanager.h>
 #include <Entities/entity.h>
+#include <Engine/engineclass.h>
 #include <Components/componentmanager.h>
 
 
@@ -18,7 +19,8 @@
 /*
  * Used to create a prebuilt group of components
  */
-class GameObject {
+template<typename T>
+class GameObject : EngineClass<T> {
 public:
     GameObject() = default;
 

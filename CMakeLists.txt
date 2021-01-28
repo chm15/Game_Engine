@@ -18,7 +18,11 @@ find_package(OpenGL)
 
 
 target_link_libraries(GameEngine
+    Entities
     Components
+    Systems
+    Engine
+    GameObject
     OpenGL
     glfw
     glew
