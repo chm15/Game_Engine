@@ -38,6 +38,6 @@ void OpenGLGraphicsSystem::init() {
     assert(this->window != NULL);  // Window failed to init
 
     glfwMakeContextCurrent(this->window); // Initialize GLEW
-    assert(glewInit());  // GLEW failed to init
+    assert(glewInit()==0);  // GLEW failed to init
     return;
 }
