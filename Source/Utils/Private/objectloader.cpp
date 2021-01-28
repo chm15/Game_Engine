@@ -72,3 +72,18 @@ void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vec
     }
     return;
 }
+
+
+
+
+void loadShader(const char* filename, std::string &shaderStr) {
+    std::ifstream inFile(filename);
+    std::string lineStr;
+
+    assert(inFile.is_open());  // Shader file failed to open.
+
+    while (std::getline(inFile, lineStr)) {
+        shaderStr += lineStr;
+    }
+    return;
+}

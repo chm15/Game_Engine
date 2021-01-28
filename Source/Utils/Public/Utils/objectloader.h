@@ -12,4 +12,6 @@
 
 void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vector<unsigned int>& indexBuffer);
 
+void loadShader(const char* filename, std::string &shaderStr);
+
 

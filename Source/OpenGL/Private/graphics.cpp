@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <cassert>
+#include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <Components/components.h>
@@ -13,13 +14,15 @@
 
 
 OpenGLGraphicsSystem::OpenGLGraphicsSystem() : System() {
-    this->init();
+    this->init();  // OpenGL related inits
     return;
 }
 
 void OpenGLGraphicsSystem::update() {
     //===== Binding =====
     glBindVertexArray(this->vao);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
 
     //===== Main =====
     std::vector<Mesh> meshes;  // TODO: INITIALIZE this with meshes
@@ -36,20 +39,32 @@ void OpenGLGraphicsSystem::update() {
 }
 
 void OpenGLGraphicsSystem::draw(Mesh& mesh) {
-    // Draw mesh. Assumes vao is already bound.
+    // Draw mesh. Assumes vao, vbo, ebo is already bound.
     //===== Clear buffers =====
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClearDepth(1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    //===== Load vbo, ebo =====
+    //vbo
+    glBufferData(GL_ARRAY_BUFFER, sizeof(mesh.vertices),
+            static_cast<void *>(mesh.vertices.data()), GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);  // must be void* for compatibility with old OpenGL
+    glEnableVertexAttribArray(0);
+    //ebo (attribpointer not required because ebo just restructures the vao)
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(mesh.indices),
+            static_cast<void *>(mesh.indices.data()), GL_STATIC_DRAW);
+
+
     //===== Load shader program =====
-    //glUseProgram(theProgram);
+    glUseProgram(this->shaderProgram);
 
     //===== Specify uniforms =====
     //glUniform3f(offsetUniform, 0.0f, 0.0f, 0.0f);
 
     //===== Draw =====
-    //glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0);
+    //glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_INT, 0);
 
     //===== Cleanup =====
     glUseProgram(0);
@@ -59,6 +74,9 @@ void OpenGLGraphicsSystem::draw(Mesh& mesh) {
 
 void OpenGLGraphicsSystem::init() {
     // Initialize OpenGL stuff
+
+    glfwSetErrorCallback(this->errorCallback);  // One of the few functions that can be called before init.
+
     assert(glfwInit());  // GLFW failed to init
 
     glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
@@ -75,9 +93,57 @@ void OpenGLGraphicsSystem::init() {
     assert(glewInit()==0);  // GLEW failed to init
 
 
-    // Initialize class members
+    // vao, vbo, ebo
     glGenVertexArrays(1, &this->vao);
+    glGenBuffers(1, &this->vbo);
+    glGenBuffers(1, &this->ebo);
+
+    // shaders
+    this->vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    this->fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    this->shaderProgram = glCreateProgram();
+
+    //===== Vertex shader =====
+    std::string vertexShaderSource;
+    loadShader("Assets/Shaders/vertex.glsl", vertexShaderSource);
+    const char *vs = vertexShaderSource.data();
+    glShaderSource(this->vertexShader, 1, &vs, NULL);
+    glCompileShader(this->vertexShader);
+    {  // error handling
+        int success;
+        char infoLog[512];
+        glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+        if(!success) {
+            glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+            std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+        }
+    }
+
+    //===== Fragment shader =====
+    std::string fragmentShaderSource;
+    loadShader("Assets/Shaders/fragment.glsl", fragmentShaderSource);
+    const char *fs = vertexShaderSource.data();
+    glShaderSource(this->fragmentShader, 1, &fs, NULL);
+    glCompileShader(fragmentShader);
+
+    //===== Shader program =====
+    glAttachShader(this->shaderProgram, this->vertexShader);
+    glAttachShader(this->shaderProgram, this->fragmentShader);
+    glLinkProgram(this->shaderProgram);
+    {  // error handling
+        int success;
+        char infoLog[512];
+        glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+        if(!success) {
+            glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+            std::cout << "ERROR::SHADER::PROGRAM::COMPILATION_FAILED\n" << infoLog << std::endl;
+        }
+    }
 
     return;
+}
+
+void OpenGLGraphicsSystem::errorCallback(int error, const char* description) {
+    std::cout << "Error: " << description << std::endl;
 }
 

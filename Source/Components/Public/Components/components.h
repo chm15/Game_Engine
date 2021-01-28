@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <Math/vec.h>
+#include <Utils/objectloader.h>
 
 class Component {
 public:
@@ -16,4 +17,9 @@ public:
 
 struct Mesh : Component {
     std::vector<Vec3> vertices;
+    std::vector<unsigned int> indices;
+
+    Mesh(const char *objFile) {
+        loadObjFile(objFile, this->vertices, this->indices);
+    }
 };
