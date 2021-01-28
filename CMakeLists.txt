@@ -13,7 +13,17 @@ add_executable(GameEngine Source/main.cpp)
 
 add_subdirectory(Source)
 
-target_link_libraries(GameEngine Components OpenGL)
+
+find_package(OpenGL)
+
+
+target_link_libraries(GameEngine
+    Components
+    OpenGL
+    glfw
+    glew
+    OpenGL::GL
+    )
 
 
 

@@ -21,6 +21,10 @@ int main() {
     engine.addGameObject<Player>();
     engine.addGameObject(Player::classID);
     */
+    OpenGLGraphicsSystem gl;
+
+    int x;
+    std::cin >> x;
 
     return 0;
 }
