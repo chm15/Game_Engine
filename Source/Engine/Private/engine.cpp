@@ -14,3 +14,7 @@ void Engine::loadGameObject(int classID, int entityID) {
      */
     return;
 }
+
+void Engine::run() {
+    return;
+}

@@ -34,10 +34,18 @@ int main() {
 
     Engine engine;
 
+    //===== Register Components =====
     engine.registerComponent<Mesh>();
     //engine.registerComponent<Transform>();
+    
+    //===== Register Systems =====
     engine.registerSystem<OpenGLGraphicsSystem>();
-    engine.registerGameObject<Cube>();
+
+    //===== Register GameObjects =====
+    engine.registerGameObject<Cube>();  // TODO: Provide variadic where GameObject args can be passed through
+
+
+    engine.run();
 
 
     int x;

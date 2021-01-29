@@ -17,6 +17,7 @@ public:
     void serialize();
 };
 
+// POD
 struct Mesh : public Component<Mesh> {
     std::vector<Vec3> vertices;
     std::vector<unsigned int> indices;

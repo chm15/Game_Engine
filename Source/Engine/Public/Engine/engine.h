@@ -21,30 +21,24 @@
  */
 class Engine {
 public:
+    // Register System with the Engine
     template<typename T>
-    void registerSystem() {
-        this->systemM.registerSystem<T>();
-        return;
-    }
+    void registerSystem();
 
+    // Register Component with the Engine
     template<typename T>
-    void registerComponent() {
-        this->componentM.registerComponent<T>();
-        return;
-    }
+    void registerComponent();
 
+    // Register GameObject with the Engine
     template<typename T>
-    void registerGameObject() {
-        this->gameObjectM.registerGameObject<T>();
-        return;
-    }
+    void registerGameObject();
 
+    // Add GameObject to the scene
+    // Will be added with provided entityID
     void loadGameObject(int classID, int entityID);
-        /*
-         * Loads GameObject using the GameObjects classID. The GameObject
-         * will be loaded with the provided entityID.
-         */
 
+    // Run main game loop
+    void run();
 public:
     Engine() = default;
 
@@ -56,3 +50,23 @@ private:
 };
 
 
+
+
+
+template<typename T>
+void Engine::registerSystem() {
+    this->systemM.registerSystem<T>();
+    return;
+}
+
+template<typename T>
+void Engine::registerComponent() {
+    this->componentM.registerComponent<T>();
+    return;
+}
+
+template<typename T>
+void Engine::registerGameObject() {
+    this->gameObjectM.registerGameObject<T>();
+    return;
+}
