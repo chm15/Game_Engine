@@ -6,11 +6,17 @@
 
 #pragma once
 
+#include <Engine/engineclass.h>
 
-class System {
+class SystemInterface {
 public:
-    virtual void update() = 0;
+    virtual void update() {}
+    virtual ~SystemInterface() = default;
+};
 
-    virtual ~System() = default;
+template<typename T>
+class System : public EngineClass<T>, public SystemInterface {
+public:
+
 };
 

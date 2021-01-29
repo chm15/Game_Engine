@@ -9,47 +9,33 @@
 #include <string>
 #include <unordered_map>
 #include <iostream>
+#include <unordered_set>
+#include <initializer_list>
 #include <Entities/entitymanager.h>
 #include <Entities/entity.h>
 #include <Engine/engineclass.h>
 #include <Components/componentmanager.h>
 
 
+// Must be initialized with the componentIDs associated with it.
+class GameObjectInterface {
+public:
+    GameObjectInterface(std::initializer_list<int> componentIDs) : signature(componentIDs) {}
+
+    virtual void load(ComponentManager& cm, int entityID) {}
+
+    virtual ~GameObjectInterface() {}
+
+    const std::unordered_set<int> signature;
+};
 
 /*
  * Used to create a prebuilt group of components
  */
 template<typename T>
-class GameObject : EngineClass<T> {
+class GameObject : public EngineClass<T>, public GameObjectInterface {
 public:
-    GameObject() = default;
+    GameObject(std::initializer_list<int> componentIDs) : EngineClass<T>(), GameObjectInterface(componentIDs) {}
 
-    virtual void load(ComponentManager& cm, int entityID) {}
 };
 
-
-
-
-
-/*
-// EXAMPLE OF HOW THIS ALL WOULD BE USED:
-
-class Mesh : GameObject {
-public:
-    void load(ComponentManager cm, int entityID) {
-        // Load components into componentManager
-        return;
-    }
-};
-
-
-Engine.loadGameObject(classID);
-
-Engine::loadGameObject(int classID) {
-    gameobject::g_GameObjectRegistry[classID].load(this->componentManager, some_entity_ID);
-}
-
-
-// Then to change the default values, Engine::updateObject(int entityID) would be called.
-
-*/

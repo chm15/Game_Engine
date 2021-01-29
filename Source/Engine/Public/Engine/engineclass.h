@@ -11,7 +11,6 @@ template<typename T>
 class EngineClass {
 public:
     static const int classID;
-public:
     EngineClass() = default;
 };
 

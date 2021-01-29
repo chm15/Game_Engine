@@ -11,10 +11,11 @@
 #include <OpenGL/graphics.h>
 
 
-class Cube : GameObject<Cube> {
+class Cube : public GameObject<Cube> {
 public:
+    Cube() : GameObject<Cube>{Mesh::classID} {}
     // Contains Mesh component
-    void load(ComponentManager& cm, int entityID);
+    void load(ComponentManager& cm, int entityID) override {}
 };
     
 

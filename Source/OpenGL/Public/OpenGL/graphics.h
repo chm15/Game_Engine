@@ -12,7 +12,7 @@
 #include <Components/components.h>
 
 
-class OpenGLGraphicsSystem : public System {
+class OpenGLGraphicsSystem : public System<OpenGLGraphicsSystem> {
 public:
     OpenGLGraphicsSystem();
     void update() override;

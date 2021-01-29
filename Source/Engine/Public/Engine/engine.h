@@ -12,6 +12,7 @@
 #include <Entities/entity.h>
 #include <Components/componentmanager.h>
 #include <Systems/systemmanager.h>
+#include <GameObject/gameobjectmanager.h>
 #include <GameObject/gameobject.h>
 
 
@@ -22,16 +23,19 @@ class Engine {
 public:
     template<typename T>
     void registerSystem() {
+        this->systemM.registerSystem<T>();
         return;
     }
 
     template<typename T>
     void registerComponent() {
+        this->componentM.registerComponent<T>();
         return;
     }
 
     template<typename T>
     void registerGameObject() {
+        this->gameObjectM.registerGameObject<T>();
         return;
     }
 
@@ -43,6 +47,12 @@ public:
 
 public:
     Engine() = default;
+
+private:
+    EntityManager entityM;
+    ComponentManager componentM;
+    SystemManager systemM;
+    GameObjectManager gameObjectM;
 };
 
 
