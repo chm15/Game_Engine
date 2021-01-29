@@ -39,6 +39,9 @@ public:
 
     // Run main game loop
     void run();
+
+    // Run all systems
+    void runSystems();
 public:
     Engine() = default;
 

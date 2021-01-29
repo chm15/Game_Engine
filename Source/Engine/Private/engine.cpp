@@ -4,6 +4,7 @@
 //
 //=============================================================================
 
+#include <memory>
 #include "engine.h"
 
 
@@ -16,5 +17,15 @@ void Engine::loadGameObject(int classID, int entityID) {
 }
 
 void Engine::run() {
+    while (true) {
+        this->runSystems();
+    }
+}
+
+void Engine::runSystems() {
+    auto systems = this->systemM.getSystems();
+    for (auto &system : systems) {
+        system->update();
+    }
     return;
 }

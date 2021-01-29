@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <unordered_map>
+#include <vector>
 #include "system.h"
 
 typedef int ClassID;
@@ -26,6 +27,8 @@ public:
     std::shared_ptr<SystemInterface> getSystem(ClassID ID) {
         return this->systems[ID];
     }
+
+    std::vector<std::shared_ptr<SystemInterface>> getSystems();
 
 private:
     std::unordered_map<ClassID, std::shared_ptr<SystemInterface>> systems {};
