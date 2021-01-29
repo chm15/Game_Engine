@@ -21,6 +21,8 @@ public:
         return;
     }
 
+    //std::vector<int> getGameObjectsWithSignature()
+
 private:
     std::unordered_map<int,GameObjectInterface> gameObjects;
 };

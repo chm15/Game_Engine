@@ -8,6 +8,7 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 #include <Entities/entitymanager.h>
 #include <Entities/entity.h>
 #include <Components/componentmanager.h>
@@ -40,8 +41,12 @@ public:
     // Run main game loop
     void run();
 
-    // Run all systems
+    // Run all registered systems
     void runSystems();
+
+    // Get entityIDs that have specified signature T (a list of classIDs)
+    template<typename T>
+    std::vector<int> getEntitiesWithSignature();
 public:
     Engine() = default;
 
@@ -72,4 +77,10 @@ template<typename T>
 void Engine::registerGameObject() {
     this->gameObjectM.registerGameObject<T>();
     return;
+}
+
+template<typename T>
+std::vector<int> Engine::getEntitiesWithSignature() {
+    std::vector<int> entityIDs;
+    return entityIDs;
 }
