@@ -82,5 +82,13 @@ void Engine::registerGameObject() {
 template<typename T>
 std::vector<int> Engine::getEntitiesWithSignature() {
     std::vector<int> entityIDs;
+
+    // First get the classIDs of all GameObjects that have the signature
+
+
+    // Now get all entityIDs that are of the returned GameObject types
+
+
+    // User can now use the entityIDs to retrieve components
     return entityIDs;
 }

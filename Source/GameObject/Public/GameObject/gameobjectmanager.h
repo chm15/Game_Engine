@@ -21,6 +21,9 @@ public:
         return;
     }
 
+    // Returns a vector of classIDs that contain the given signature.
+    std::vector<int> getObjectsWithSignature(std::initializer_list<int> componentIDs);
+
     //std::vector<int> getGameObjectsWithSignature()
 
 private:

@@ -22,7 +22,7 @@
 // Must be initialized with the componentIDs associated with it.
 class GameObjectInterface {
 public:
-    GameObjectInterface(std::initializer_list<int> componentIDs) : signature(componentIDs) {}
+    GameObjectInterface(int _classID, std::initializer_list<int> componentIDs) : signature(componentIDs), classID(_classID) {}
 
     virtual void load(ComponentManager& cm, int entityID) {}
 
@@ -31,9 +31,12 @@ public:
 
     virtual ~GameObjectInterface() {}
 
+    const int classID;
 protected:
     const std::unordered_set<int> signature;
+
 };
+
 
 /*
  * Used to create a prebuilt group of components
@@ -41,7 +44,8 @@ protected:
 template<typename T>
 class GameObject : public EngineClass<T>, public GameObjectInterface {
 public:
-    GameObject(std::initializer_list<int> componentIDs) : EngineClass<T>(), GameObjectInterface(componentIDs) {}
+    using EngineClass<T>::classID;
+    GameObject(std::initializer_list<int> componentIDs) : EngineClass<T>(), GameObjectInterface(this->classID, componentIDs) {}
 
 };
 

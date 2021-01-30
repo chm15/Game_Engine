@@ -1,6 +1,7 @@
 set(
     SOURCES 
         "Private/gameobject.cpp"
+        "Private/gameobjectmanager.cpp"
 )
 
 
