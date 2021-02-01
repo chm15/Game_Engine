@@ -24,6 +24,8 @@ class GameObjectInterface {
 public:
     GameObjectInterface(int _classID, std::initializer_list<int> componentIDs) : signature(componentIDs), classID(_classID) {}
 
+    GameObjectInterface() : classID(-1), signature() {}
+
     virtual void load(ComponentManager& cm, int entityID) {}
 
     // Returns true if T is a subset of this objects signature.

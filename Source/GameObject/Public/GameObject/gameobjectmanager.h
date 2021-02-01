@@ -7,12 +7,15 @@
 #pragma once
 
 #include <unordered_map>
+#include <Components/componentmanager.h>
 #include "gameobject.h"
 
 
 class GameObjectManager {
 public:
     GameObjectManager() = default;
+
+    void loadGameObject(ComponentManager &cm, int gameObjectID, int entityID); 
 
     template<typename T>
     void registerGameObject() {
@@ -23,8 +26,6 @@ public:
 
     // Returns a vector of classIDs that contain the given signature.
     std::vector<int> getObjectsWithSignature(std::initializer_list<int> componentIDs);
-
-    //std::vector<int> getGameObjectsWithSignature()
 
 private:
     std::unordered_map<int,GameObjectInterface> gameObjects;
