@@ -16,4 +16,6 @@ target_include_directories( ${PROJECT_NAME}
     PRIVATE ${PROJECT_SOURCE_DIR}/Public/${PROJECT_NAME}
 )
 
-target_link_libraries(OpenGL Math Components Systems glew glfw)
+find_package(OpenGL)
+
+target_link_libraries(OpenGL Math Components Systems glew glfw OpenGL::GL )

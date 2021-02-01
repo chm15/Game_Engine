@@ -9,12 +9,13 @@
 #include "engine.h"
 
 
-void Engine::loadGameObject(int classID, int entityID) {
+void Engine::loadGameObject(int gameObjectID, int entityID) {
     /*
      * Loads GameObject using the GameObjects classID. The GameObject
      * will be loaded with the provided entityID.
      */
-
+    this->entityM.create(entityID, gameObjectID);
+    this->gameObjectM.loadGameObject(this->componentM, gameObjectID, entityID);
     return;
 }
 
@@ -41,8 +42,14 @@ std::vector<int> Engine::getEntitiesWithSignature(std::initializer_list<int> sig
 
 
     // Now get all entityIDs that are of the returned GameObject types
-
-
+    for (int goID : gameObjectIDs) {
+        std::vector<int> tempIDs = entityM.getEntitiesWithGameObjectID(goID);
+        for (int id : tempIDs) {
+            entityIDs.push_back(id);
+        }
+    }
     // User can now use the entityIDs to retrieve components
     return entityIDs;
 }
+
+

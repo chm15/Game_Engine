@@ -15,9 +15,8 @@ public:
 
     Entity(const Entity &obj) : id(obj.id), gameObjectID(obj.gameObjectID) {}
 
-    int const gameObjectID;
 
-private:
+    int gameObjectID;
     int id;
 };
 

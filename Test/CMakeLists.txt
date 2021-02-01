@@ -17,3 +17,9 @@ target_link_libraries(test_engineclass Engine)
 add_executable( test_utils test_utils.cpp )
 add_test( utils test_utils )
 target_link_libraries(test_utils Math Utils)
+
+# Engine Test
+add_executable( test_engine test_engine.cpp )
+add_test( engine test_engine )
+target_link_libraries(test_engine Engine Components OpenGL)
+
