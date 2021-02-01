@@ -15,10 +15,11 @@
 class EntityManager {
 public:
     EntityManager() = default;
+    template<typename T>
     void create() {
         // Will create a new Entity with local ID.
         if (totalEntities < MAX_ENTITIES) {
-            entities[totalEntities] = Entity(totalEntities);
+            entities[totalEntities] = Entity(totalEntities, T::classID);
             ++totalEntities;
         } else {
             std::cout << "\n\nMAX ENTITIES REACHED!\n\n" << std::endl;

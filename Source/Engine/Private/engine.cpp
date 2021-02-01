@@ -5,6 +5,7 @@
 //=============================================================================
 
 #include <memory>
+#include <vector>
 #include "engine.h"
 
 
@@ -28,4 +29,19 @@ void Engine::runSystems() {
         system->update();
     }
     return;
+}
+
+// The signature is a initializer list of componentIDs (classIDs)
+std::vector<int> Engine::getEntitiesWithSignature(std::initializer_list<int> signature) {
+    std::vector<int> entityIDs;
+
+    // First get the classIDs of all GameObjects that have the signature
+    std::vector<int> gameObjectIDs = gameObjectM.getObjectsWithSignature(signature);
+
+
+    // Now get all entityIDs that are of the returned GameObject types
+
+
+    // User can now use the entityIDs to retrieve components
+    return entityIDs;
 }

@@ -9,8 +9,13 @@
 
 class Entity {
 public:
-    Entity(int _id) : id(_id) {};
-    Entity() = default;
+    Entity() : id(-1), gameObjectID(-1) {}
+
+    Entity(int _id, int _gameObjectID) : id(_id), gameObjectID(_gameObjectID) {}
+
+    Entity(const Entity &obj) : id(obj.id), gameObjectID(obj.gameObjectID) {}
+
+    int const gameObjectID;
 
 private:
     int id;

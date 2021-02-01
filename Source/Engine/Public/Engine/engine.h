@@ -44,9 +44,9 @@ public:
     // Run all registered systems
     void runSystems();
 
-    // Get entityIDs that have specified signature T (a list of classIDs)
-    template<typename T>
-    std::vector<int> getEntitiesWithSignature();
+    // Get entityIDs with specified signature (a list of classIDs)
+    std::vector<int> getEntitiesWithSignature(std::initializer_list<int> signature);
+
 public:
     Engine() = default;
 
@@ -60,6 +60,10 @@ private:
 
 
 
+
+
+
+//===== Templated definitions =====
 
 template<typename T>
 void Engine::registerSystem() {
@@ -79,16 +83,3 @@ void Engine::registerGameObject() {
     return;
 }
 
-template<typename T>
-std::vector<int> Engine::getEntitiesWithSignature() {
-    std::vector<int> entityIDs;
-
-    // First get the classIDs of all GameObjects that have the signature
-
-
-    // Now get all entityIDs that are of the returned GameObject types
-
-
-    // User can now use the entityIDs to retrieve components
-    return entityIDs;
-}
