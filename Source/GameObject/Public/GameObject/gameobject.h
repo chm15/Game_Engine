@@ -9,73 +9,46 @@
 #include <string>
 #include <unordered_map>
 #include <iostream>
+#include <vector>
+#include <unordered_set>
+#include <initializer_list>
 #include <Entities/entitymanager.h>
 #include <Entities/entity.h>
+#include <Engine/engineclass.h>
 #include <Components/componentmanager.h>
-#include <ClassTable/iengineclass.h>
 
 
 
-class GameObjectInterface;
-
-
-namespace gameobject {
-    extern std::unordered_map<int,GameObjectInterface> g_GameObjectRegistry;
-}
-
-
-
-/*
- * Used to dynamically load GameObjects into the engine
- * from the global GameObjectRegistry.
- */
+// Must be initialized with the componentIDs associated with it.
 class GameObjectInterface {
 public:
-    GameObjectInterface() = default;
-    virtual void load(ComponentManager& cm, int entityID) {}
-};
+    GameObjectInterface(int _classID, std::initializer_list<int> componentIDs) : signature(componentIDs), classID(_classID) {}
 
+    GameObjectInterface() : classID(-1), signature() {}
+
+    virtual void load(ComponentManager& cm, int entityID) {}
+
+    // Returns true if T is a subset of this objects signature.
+    bool hasSignature(std::initializer_list<int> componentIDs);
+
+    virtual ~GameObjectInterface() {}
+
+    const int classID;
+protected:
+    const std::unordered_set<int> signature;
+
+};
 
 
 /*
  * Used to create a prebuilt group of components
  */
 template<typename T>
-class GameObject : public IEngineClass, public GameObjectInterface {
+class GameObject : public EngineClass<T>, public GameObjectInterface {
 public:
-    //virtual ~GameObject() = default;
+    using EngineClass<T>::classID;
+    GameObject(std::initializer_list<int> componentIDs) : EngineClass<T>(), GameObjectInterface(this->classID, componentIDs) {}
 
-public:
-    GameObject() = default;
-
-    void instantiate() override {
-        gameobject::g_GameObjectRegistry.emplace(this->classID, T());
-    }
 };
 
 
-
-
-
-/*
-// EXAMPLE OF HOW THIS ALL WOULD BE USED:
-
-class Mesh : GameObject {
-public:
-    void load(ComponentManager cm, int entityID) {
-        // Load components into componentManager
-        return;
-    }
-};
-
-
-Engine.loadGameObject(classID);
-
-Engine::loadGameObject(int classID) {
-    gameobject::g_GameObjectRegistry[classID].load(this->componentManager, some_entity_ID);
-}
-
-
-// Then to change the default values, Engine::updateObject(int entityID) would be called.
-
-*/

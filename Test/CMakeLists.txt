@@ -3,40 +3,23 @@ cmake_minimum_required(VERSION 3.16)
 project(Testing)
 
 
-# ClassTable
-add_executable( test_classtable test_classtable.cpp )
-add_test( classtable test_classtable )
-
-target_link_libraries(test_classtable ClassTable Components)
-
-
-
-# Components
-add_executable( test_components test_components.cpp )
-add_test( components test_components )
-
-target_link_libraries(test_components ClassTable Components Coordinator)
-
-# Systems
-add_executable( test_systems test_systems.cpp )
-add_test( systems test_systems )
-
-target_link_libraries(test_systems ClassTable Systems Coordinator)
-
-# Entities
-add_executable( test_entities test_entities.cpp )
-add_test( entities test_entities )
-
-target_link_libraries(test_entities ClassTable Systems Coordinator Entities)
-
 # Math
 add_executable( test_math test_math.cpp )
 add_test( math test_math )
-
 target_link_libraries(test_math Math)
 
-# GameObject
-add_executable( test_gameobject test_gameobject.cpp )
-add_test( gameobject test_gameobject)
+# EngineClass
+add_executable( test_engineclass test_engineclass.cpp )
+add_test( engineclass test_engineclass )
+target_link_libraries(test_engineclass Engine)
 
-target_link_libraries(test_gameobject GameObject ClassTable)
+# Utils Test
+add_executable( test_utils test_utils.cpp )
+add_test( utils test_utils )
+target_link_libraries(test_utils Math Utils)
+
+# Engine Test
+add_executable( test_engine test_engine.cpp )
+add_test( engine test_engine )
+target_link_libraries(test_engine Engine Components OpenGL)
+

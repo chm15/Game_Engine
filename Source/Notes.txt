@@ -1,15 +1,7 @@
 =============== Copyright Connor McLaughlan, All rights reserved. =============
 
-Initialization:
-
-    - EngineClass::init() must be called before any of the registered
-        EngineClasses can be used!
-
-    - EngineClass has a virtual member initialization() that can be overridden
-        in subclasses to avoid constructor fights amongst globals.
-    
-
 Naming conventions:
+
     Class members:
         - Don't use m_genericMember; use this->genericMember where possible.
 
@@ -23,10 +15,23 @@ Naming conventions:
         - MY_MACRO()
 
 
+Improvements:
+    - Each system should have an init() method where they have a chance to set
+        themselves/any external libraries up. The Game_Engine init() method
+        would be responsible for calling each system init methods as well
+        as the EngineClass init method.
+
+    - How to provide initial values to Entity blueprints?
+
+    - Engine instantiation will work like this example:
+        [https://github.com/taurheim/NomadECS/blob/master/example/main.cpp]
+
 Subsystems:
 
     - Systems should have an abstract interface declared in a .h file.
+    
     - Should use a global variable declared in a .cpp file for each system.
+
     - Source Engine: 
         "Each subsystem defines an abstract interface in a .h file, 
         while typically implementing it and creating a global variable in a .cpp 
@@ -36,11 +41,3 @@ Subsystems:
         initialization, shutdown, and calling the appropriate update functions 
         as necessary." [https://developer.valvesoftware.com/wiki/Engine_Structure]
 
-
-Improvements:
-    - Each system should have an init() method where they have a chance to set
-        themselves/any external libraries up. The Game_Engine init() method
-        would be responsible for calling each system init methods as well
-        as the EngineClass init method.
-
-    - How to provide initial values to Entity blueprints?

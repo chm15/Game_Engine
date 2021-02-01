@@ -1,6 +1,7 @@
 set(
     SOURCES 
         "Private/gameobject.cpp"
+        "Private/gameobjectmanager.cpp"
 )
 
 
@@ -16,4 +17,4 @@ target_include_directories( ${PROJECT_NAME}
     PRIVATE ${PROJECT_SOURCE_DIR}/Public/${PROJECT_NAME}
 )
 
-target_link_libraries(GameObject ClassTable Coordinator Entities Math)
+target_link_libraries(GameObject Components Entities Math Engine)

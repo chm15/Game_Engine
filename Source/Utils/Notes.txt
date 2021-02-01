@@ -1,0 +1,8 @@
+=============== Copyright Connor McLaughlan, All rights reserved. =============
+
+- Used for loading 3d assets.
+
+- A good example: [https://stackoverflow.com/questions/52824956/
+    how-can-i-parse-a-simple-obj-file-into-triangles]
+
+- Wiki on .obj files: [https://en.wikipedia.org/wiki/Wavefront_.obj_file]

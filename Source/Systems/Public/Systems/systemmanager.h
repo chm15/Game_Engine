@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <unordered_map>
+#include <vector>
 #include "system.h"
 
 typedef int ClassID;
@@ -18,18 +19,19 @@ class SystemManager {
 public:
     template<typename T> 
     void registerSystem() {
-        // System must be DEFINED and IMPLEMENTED with macros first.
-        // Init() must also be called on the EngineClass.
+        // TODO: Verify that the system is not already registered!
         this->systems.insert({T::classID, std::make_shared<T>()});
         return;
     }
 
-    std::shared_ptr<System> getSystem(ClassID ID) {
+    std::shared_ptr<SystemInterface> getSystem(ClassID ID) {
         return this->systems[ID];
     }
 
+    std::vector<std::shared_ptr<SystemInterface>> getSystems();
+
 private:
-    std::unordered_map<ClassID, std::shared_ptr<System>> systems {};
+    std::unordered_map<ClassID, std::shared_ptr<SystemInterface>> systems {};
 };
 
 

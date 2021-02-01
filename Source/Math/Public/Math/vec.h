@@ -8,6 +8,31 @@
 
 #include <initializer_list>
 
+
+// Vec3 MUST have the same memory footprint as a POD struct
+// comprised of three floats (four bytes each).
+class Vec3 {
+public:
+    Vec3() = default;
+    Vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
+public:
+    float x, y, z;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+///////////// FANCY STUFF ///////////////
+//////// AKA EXPENSIVE STUFF ////////////
+
 // Base Vector for purposes of template specialization.
 template<class T, int I>
 class VecBase {
@@ -56,7 +81,4 @@ public:
 };
 
 
-// Alias
-typedef Vec<float, 3> Vec3;
-typedef Vec<float, 4> Vec4;
 

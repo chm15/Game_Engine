@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,libGLEW.so.2.1 -o lib/libGLEW.so.2.1.0 CMakeFiles/glew.dir/home/connor/projects/Game_Engine/Source/3rdparty/glew/src/glew.c.o  -lGL 

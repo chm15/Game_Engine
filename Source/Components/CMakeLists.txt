@@ -16,4 +16,4 @@ target_include_directories( ${PROJECT_NAME}
     PRIVATE ${PROJECT_SOURCE_DIR}/Public/${PROJECT_NAME}
 )
 
-target_link_libraries(Components ClassTable Coordinator Entities Math)
+target_link_libraries(Components Entities Math Utils Engine)

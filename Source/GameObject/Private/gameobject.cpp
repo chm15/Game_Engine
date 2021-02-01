@@ -4,11 +4,19 @@
 //
 //=============================================================================
 
-#include <unordered_map>
 #include "gameobject.h"
 
 
 
-namespace gameobject {
-    std::unordered_map<int,GameObjectInterface> g_GameObjectRegistry{};
+bool GameObjectInterface::hasSignature(std::initializer_list<int> componentIDs) {
+    bool containsSignature = true;
+    std::vector<int> classIDs {componentIDs};
+    for (int classID : classIDs) {
+        if (!(this->signature.count(classID))) {
+            containsSignature = false;
+            break;
+        }
+    }
+    return containsSignature;
 }
+
