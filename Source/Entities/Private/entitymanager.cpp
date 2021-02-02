@@ -34,3 +34,19 @@ void EntityManager::create(int entityID, int gameObjectID) {
     }
     return;
 }
+
+
+// Returns newly created entityID
+int EntityManager::create(int gameObjectID) {
+    // Will create a new Entity with local ID.
+    int newEntityID;
+    if (totalEntities < MAX_ENTITIES) {
+        newEntityID = totalEntities;
+        entities[totalEntities] = Entity(newEntityID, gameObjectID);
+        ++totalEntities;
+    } else {
+        std::cout << "\n\nMAX ENTITIES REACHED!\n\n" << std::endl;
+        newEntityID = -1;
+    }
+    return newEntityID;
+}

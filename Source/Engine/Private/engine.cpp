@@ -9,6 +9,13 @@
 #include "engine.h"
 
 
+void Engine::loadGameObject(int gameObjectID) {
+    int entityID = this->entityM.create(gameObjectID);
+    this->gameObjectM.loadGameObject(this->componentM, gameObjectID, entityID);
+    return;
+}
+
+
 void Engine::loadGameObject(int gameObjectID, int entityID) {
     /*
      * Loads GameObject using the GameObjects classID. The GameObject

@@ -36,7 +36,11 @@ public:
 
     // Add GameObject to the scene
     // Will be added with provided entityID
-    void loadGameObject(int classID, int entityID);
+    void loadGameObject(int gameObjectID, int entityID);
+
+    // Add GameObject to the scene
+    // Will be added with local entityID
+    void loadGameObject(int gameObjectID);
 
     // Run main game loop
     void run();

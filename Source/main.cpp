@@ -38,11 +38,15 @@ int main() {
     engine.registerComponent<Mesh>();
     //engine.registerComponent<Transform>();
     
+    //===== Register GameObjects =====
+    engine.registerGameObject<Cube>();  // TODO: Provide variadic where GameObject args can be passed through
+    
     //===== Register Systems =====
     engine.registerSystem<OpenGLGraphicsSystem>();
 
-    //===== Register GameObjects =====
-    engine.registerGameObject<Cube>();  // TODO: Provide variadic where GameObject args can be passed through
+
+    //===== (Optional) Add game objects =====
+    engine.loadGameObject(Cube::classID);  // 69 is the entityID. This simulates a server authoritative ID system.
 
 
     engine.run();
