@@ -51,6 +51,8 @@ public:
     // Get entityIDs with specified signature (a list of classIDs)
     std::vector<int> getEntitiesWithSignature(std::initializer_list<int> signature);
 
+
+
 public:
     Engine() = default;
 

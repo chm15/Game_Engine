@@ -29,10 +29,11 @@ public:
                 );
     };
 
-    void addComponent(Entity entity, int classID) {
+    void addComponent(int entityID, int componentID) {
         // Use the component's classID (assigned by the classtable.
         // The classID will be used in a map between classID's and
         // component arrays.
+        this->componentArrays[componentID]->push_back(entityID);
     }
 
     void removeComponent(Entity entity, int classID) {

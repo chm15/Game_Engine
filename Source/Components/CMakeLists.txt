@@ -1,6 +1,7 @@
 set(
     SOURCES 
         "Private/component.cpp"
+        "Private/componentarray.cpp"
 )
 
 

@@ -19,6 +19,7 @@ public:
     virtual int size() = 0;
     // The virtual destructor MUST be declared.
     // https://stackoverflow.com/questions/3065154/undefined-reference-to-vtable
+    virtual void push_back(int entityID) = 0;
     virtual ~BaseComponentArray() = default;  // Has to be implemented
 };
 
@@ -27,6 +28,11 @@ class ComponentArray : public BaseComponentArray {
 public:
     int size() override {
         return arraySize;
+    }
+
+    void push_back(int entityID) override {
+        this->componentArray[arraySize++] = T();
+        return;
     }
 
 private:
@@ -40,5 +46,8 @@ private:
     std::unordered_map<EntityID, int> entityToIndexMap;
     std::unordered_map<int, EntityID> indexToEntityMap;
 };
+
+
+
 
 
