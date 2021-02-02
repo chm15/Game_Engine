@@ -31,8 +31,15 @@ public:
     }
 
     void push_back(int entityID) override {
-        this->componentArray[arraySize++] = T();
+        int componentPos = arraySize++;
+        this->componentArray[componentPos] = T();
+        this->entityToIndexMap[entityID] = componentPos;
         return;
+    }
+
+    T& getComponent(int entityID) {
+        int index = entityToIndexMap[entityID];
+        return componentArray[index];
     }
 
 private:

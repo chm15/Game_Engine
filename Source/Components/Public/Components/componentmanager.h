@@ -27,7 +27,7 @@ public:
         this->componentArrays.insert(
                 {classID, std::make_shared<ComponentArray<T>>()}
                 );
-    };
+    }
 
     void addComponent(int entityID, int componentID) {
         // Use the component's classID (assigned by the classtable.
@@ -41,6 +41,10 @@ public:
         // corresponding component array.
     }
 
+    // Returns component of type T associated with entity
+    template<typename T>
+    T& getComponent(int entityID);
+
 public:
     ComponentManager() = default;
 
@@ -52,6 +56,18 @@ public:
     //std::shared_ptr<ComponentArray> getComponentArray(int classID) {};
 
 };
+
+
+
+
+
+
+
+template<typename T>
+T& ComponentManager::getComponent(int entityID) {
+    ComponentArray<T> components =  static_cast<ComponentArray<T>>(this->componentArrays[T::classID]);
+    return components.getComponent(entityID);
+}
 
 
 

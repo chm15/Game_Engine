@@ -51,6 +51,9 @@ public:
     // Get entityIDs with specified signature (a list of classIDs)
     std::vector<int> getEntitiesWithSignature(std::initializer_list<int> signature);
 
+    // Get component associated with entityID
+    template<typename T>
+    T& getComponent(int entityID);
 
 
 public:
@@ -87,5 +90,10 @@ template<typename T>
 void Engine::registerGameObject() {
     this->gameObjectM.registerGameObject<T>();
     return;
+}
+
+template<typename T>
+T& Engine::getComponent(int entityID) {
+    return this->componentM.getComponent<T>(entityID);
 }
 

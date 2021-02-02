@@ -46,7 +46,7 @@ int main() {
 
 
     //===== (Optional) Add game objects =====
-    engine.loadGameObject(Cube::classID);  // 69 is the entityID. This simulates a server authoritative ID system.
+    engine.loadGameObject(Cube::classID); 
 
 
     engine.run();
