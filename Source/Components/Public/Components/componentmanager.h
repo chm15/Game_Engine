@@ -65,76 +65,7 @@ public:
 
 template<typename T>
 T& ComponentManager::getComponent(int entityID) {
-    ComponentArray<T> components =  static_cast<ComponentArray<T>>(this->componentArrays[T::classID]);
+    ComponentArray<T> components =  static_cast<ComponentArray<T>&>(  *(this->componentArrays[T::classID])  );
     return components.getComponent(entityID);
 }
 
-
-
-/*
-
-==================== EXAMPLE ========================
-
-#include <memory>
-#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-
-
-class Cls1 {
-    void print(std::string str) {
-        std::cout << "Cls1: " << str << std::endl;
-        return;
-    }
-};
-
-
-class Cls2 {
-    void print(std::string str) {
-        std::cout << "Cls2: " << str << std::endl;
-        return;
-    }
-};
-
-
-class BaseClsArray {};
-
-
-template<typename T>
-class ClsArray : public BaseClsArray {
-public:
-    T getCls(int index) {
-        return this->classes[index];
-    }
-
-    void addCls() {
-        this->classes.emplace();
-    }
-
-public:
-    ClsArray() = default;
-
-    ClsArray(int totalInit) {
-        for (int i=0;i<totalInit;i++) {
-            this->classes.emplace_back();
-        }
-    }
-
-private:
-    std::vector<T> classes;
-};
-
-int main() {
-
-    std::unordered_map<int, std::shared_ptr<BaseClsArray> > clsArrays{};
-    
-
-    clsArrays.insert({1, std::make_shared<ClsArray<Cls1>>(3)});
-
-
-
-    return 0;
-}
-
-*/

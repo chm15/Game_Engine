@@ -10,11 +10,13 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <Components/components.h>
+#include <Engine/engine.h>
 
 
 class OpenGLGraphicsSystem : public System<OpenGLGraphicsSystem> {
 public:
-    OpenGLGraphicsSystem();
+    OpenGLGraphicsSystem(Engine &_engine);
+    //OpenGLGraphicsSystem(Engine &_engine) : System<OpenGLGraphicsSystem>(_engine) {}
     void update() override;
 
 private:

@@ -6,7 +6,11 @@
 
 #pragma once
 
+#include <Engine/engine.h>
 #include <Engine/engineclass.h>
+
+
+class Engine;
 
 class SystemInterface {
 public:
@@ -17,6 +21,9 @@ public:
 template<typename T>
 class System : public EngineClass<T>, public SystemInterface {
 public:
+    System(Engine &_engine) : engine(_engine) {}
 
+    Engine &engine; 
 };
+
 

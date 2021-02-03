@@ -6,8 +6,10 @@
 
 #include <vector>
 #include <memory>
+#include <Engine/engine.h>
 #include "system.h"
 #include "systemmanager.h"
+
 
 
 std::vector<std::shared_ptr<SystemInterface>> SystemManager::getSystems() {

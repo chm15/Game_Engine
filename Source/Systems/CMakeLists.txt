@@ -1,6 +1,7 @@
 set(
     SOURCES 
         "Private/systemmanager.cpp"
+        "Private/system.cpp"
 )
 
 
@@ -16,5 +17,5 @@ target_include_directories( ${PROJECT_NAME}
     PRIVATE ${PROJECT_SOURCE_DIR}/Public/${PROJECT_NAME}
 )
 
+target_link_libraries(Systems Engine)
 
-target_link_libraries(${PROJECT_NAME} Engine)

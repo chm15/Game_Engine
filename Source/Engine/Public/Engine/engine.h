@@ -57,7 +57,7 @@ public:
 
 
 public:
-    Engine() = default;
+    Engine() : entityM(), componentM(), systemM(*this), gameObjectM() {}
 
 private:
     EntityManager entityM;

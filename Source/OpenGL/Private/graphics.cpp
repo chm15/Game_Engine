@@ -13,21 +13,29 @@
 #include "graphics.h"
 
 
-OpenGLGraphicsSystem::OpenGLGraphicsSystem() : System() {
+OpenGLGraphicsSystem::OpenGLGraphicsSystem(Engine &_engine) : System(_engine) {
     this->init();  // OpenGL related inits
     return;
 }
 
+
+//std::vector<int> getEntitiesWithSignature(std::initializer_list<int> signature);
+//T& Engine::getComponent(int entityID) {
+
+
 void OpenGLGraphicsSystem::update() {
+    std::vector<int> entitiesWithSignature = this->engine.getEntitiesWithSignature({Mesh::classID});
+
+
     //===== Binding =====
     glBindVertexArray(this->vao);
     glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
 
     //===== Main =====
-    std::vector<Mesh> meshes;  // TODO: INITIALIZE this with meshes
+    for (int entityID : entitiesWithSignature) {
+        Mesh &mesh = this->engine.getComponent<Mesh>(entityID);
 
-    for (Mesh& mesh : meshes) {
         this->draw(mesh);
     }
 
