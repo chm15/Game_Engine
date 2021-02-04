@@ -72,22 +72,18 @@ void OpenGLGraphicsSystem::update() {
 
 void OpenGLGraphicsSystem::draw(Mesh& mesh) {
     // Draw mesh. Assumes vao, vbo, ebo is already bound.
-    /////////// TODO:TEMP! ///////////////////////////////
-    glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
-    /////////////////////////////////////////////////////
 
     //===== Load vbo, ebo =====
     //vbo
-    glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * sizeof(float),
-            &mesh.vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * 3 * sizeof(float),  // Vec3
+            &mesh.vertices[0], GL_STREAM_DRAW);
+
+    //ebo (attribpointer not required because ebo just restructures the vao)
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() * sizeof(int),
+            &mesh.indices[0], GL_STREAM_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);  // must be void* for compatibility with old OpenGL
     glEnableVertexAttribArray(0);
-    //ebo (attribpointer not required because ebo just restructures the vao)
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() * sizeof(int),
-            &mesh.indices[0], GL_STATIC_DRAW);
-
 
     //===== Load shader program =====
     glUseProgram(this->shaderProgram);
