@@ -12,7 +12,7 @@
 
 
 void GameObjectManager::loadGameObject(ComponentManager &cm, int gameObjectID, int entityID) {
-    this->gameObjects[gameObjectID].load(cm, entityID);
+    this->gameObjects[gameObjectID]->load(cm, entityID);
     return;
 }
 
@@ -21,7 +21,7 @@ std::vector<int> GameObjectManager::getObjectsWithSignature(std::initializer_lis
     std::vector<int> classIDs;
 
     for (auto &pair : this->gameObjects) {
-        auto &go = pair.second;
+        auto &go = *(pair.second);
         if (go.hasSignature(componentIDs)) {
             classIDs.push_back(go.classID);
         }

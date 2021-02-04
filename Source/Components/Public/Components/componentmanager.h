@@ -82,7 +82,7 @@ void ComponentManager::addComponent(T &component) {
 
 template<typename T>
 T& ComponentManager::getComponent(int entityID) {
-    ComponentArray<T> components =  static_cast<ComponentArray<T>&>(  *(this->componentArrays[T::classID])  );
+    ComponentArray<T>& components =  static_cast<ComponentArray<T>&>(  *(this->componentArrays[T::classID])  );
     return components.getComponent(entityID);
 }
 

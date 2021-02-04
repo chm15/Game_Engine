@@ -51,6 +51,11 @@ void OpenGLGraphicsSystem::update() {
     glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
 
+    //===== Clear buffers =====
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearDepth(1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     //===== Main =====
     for (int entityID : entitiesWithSignature) {
         Mesh &mesh = this->engine.getComponent<Mesh>(entityID);
@@ -58,7 +63,7 @@ void OpenGLGraphicsSystem::update() {
         this->draw(mesh);
     }
 
-    glfwSwapBuffers(window);
+    glfwSwapBuffers(this->window);
 
     //===== Cleanup =====
     glBindVertexArray(0);
@@ -67,21 +72,21 @@ void OpenGLGraphicsSystem::update() {
 
 void OpenGLGraphicsSystem::draw(Mesh& mesh) {
     // Draw mesh. Assumes vao, vbo, ebo is already bound.
-    //===== Clear buffers =====
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    glClearDepth(1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    /////////// TODO:TEMP! ///////////////////////////////
+    glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
+    /////////////////////////////////////////////////////
 
     //===== Load vbo, ebo =====
     //vbo
-    glBufferData(GL_ARRAY_BUFFER, sizeof(mesh.vertices),
-            static_cast<void *>(mesh.vertices.data()), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * sizeof(float),
+            &mesh.vertices[0], GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);  // must be void* for compatibility with old OpenGL
     glEnableVertexAttribArray(0);
     //ebo (attribpointer not required because ebo just restructures the vao)
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(mesh.indices),
-            static_cast<void *>(mesh.indices.data()), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() * sizeof(int),
+            &mesh.indices[0], GL_STATIC_DRAW);
 
 
     //===== Load shader program =====
@@ -90,12 +95,20 @@ void OpenGLGraphicsSystem::draw(Mesh& mesh) {
     //===== Specify uniforms =====
     //glUniform3f(offsetUniform, 0.0f, 0.0f, 0.0f);
 
+    // Bind VAO right before drawing.  TODO: This seems redundant.
+    glBindVertexArray(this->vao);
+
     //===== Draw =====
-    glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, (void*)0);
 
     //===== Cleanup =====
     glUseProgram(0);
 
+
+    int error = glGetError();  
+    if (error) {
+        std::cout << "OpenGL Error: " << error << std::endl;
+    }
     return;
 }
 
@@ -117,10 +130,12 @@ void OpenGLGraphicsSystem::init() {
     assert(this->window != NULL);  // Window failed to init
 
     glfwMakeContextCurrent(this->window); // Initialize GLEW
+    glewExperimental = GL_TRUE;
     assert(glewInit()==0);  // GLEW failed to init
 
-
-    glViewport(0, 0, 800, 600);
+    int width, height;
+    glfwGetFramebufferSize(this->window, &width, &height);
+    glViewport(0, 0, width, height);
     glfwSetFramebufferSizeCallback(this->window, framebuffer_size_callback);
 
 
@@ -181,6 +196,13 @@ void OpenGLGraphicsSystem::init() {
             std::cout << "ERROR::SHADER::PROGRAM::COMPILATION_FAILED\n" << infoLog << std::endl;
         }
     }
+    glDeleteShader(this->vertexShader);
+    glDeleteShader(this->fragmentShader);
+
+
+    //===== Set to wireframe for debug =====
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 
     return;
 }

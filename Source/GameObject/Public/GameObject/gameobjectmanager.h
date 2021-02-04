@@ -7,6 +7,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <memory>
 #include <Components/componentmanager.h>
 #include "gameobject.h"
 
@@ -20,7 +21,7 @@ public:
     template<typename T>
     void registerGameObject() {
         // TODO: Take initializer list to pass init args.
-        this->gameObjects.emplace(T::classID,T{});
+        this->gameObjects.emplace(T::classID, std::make_shared<T>() );
         return;
     }
 
@@ -28,6 +29,6 @@ public:
     std::vector<int> getObjectsWithSignature(std::initializer_list<int> componentIDs);
 
 private:
-    std::unordered_map<int,GameObjectInterface> gameObjects;
+    std::unordered_map<int, std::shared_ptr<GameObjectInterface> > gameObjects;
 };
 
