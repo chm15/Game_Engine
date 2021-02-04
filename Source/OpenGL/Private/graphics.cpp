@@ -35,6 +35,10 @@ OpenGLGraphicsSystem::OpenGLGraphicsSystem(Engine &_engine) : System(_engine) {
 
 
 void OpenGLGraphicsSystem::update() {
+    bool shouldClose = glfwWindowShouldClose(this->window);
+    if (shouldClose) {
+        std::cout << "Implement close method in OpenGL lib!" << std::endl;
+    }
     glfwPollEvents();
 
 
