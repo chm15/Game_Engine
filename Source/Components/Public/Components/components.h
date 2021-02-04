@@ -14,7 +14,10 @@
 template<typename T>
 class Component : public EngineClass<T> {
 public:
+    Component() : entityID(-1) {}
     void serialize();
+
+    int entityID;  // used to link the component with a certain entity.
 };
 
 // POD

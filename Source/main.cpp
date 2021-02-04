@@ -15,7 +15,10 @@ class Cube : public GameObject<Cube> {
 public:
     Cube() : GameObject<Cube>{Mesh::classID} {}
     // Contains Mesh component
-    void load(ComponentManager& cm, int entityID) override {}
+    void load(ComponentManager& cm, int entityID) override {
+        Mesh mesh("Assets/calibration_cube_1.obj");
+        cm.addComponent<Mesh>(mesh);
+    }
 };
     
 

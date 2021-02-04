@@ -17,9 +17,11 @@
 class BaseComponentArray {
 public:
     virtual int size() = 0;
+    
+    virtual void push_back(int entityID) = 0;
+
     // The virtual destructor MUST be declared.
     // https://stackoverflow.com/questions/3065154/undefined-reference-to-vtable
-    virtual void push_back(int entityID) = 0;
     virtual ~BaseComponentArray() = default;  // Has to be implemented
 };
 
@@ -36,6 +38,17 @@ public:
         this->entityToIndexMap[entityID] = componentPos;
         return;
     }
+    
+    // Does not have interface. Must be static_casted to use this.
+    // Copy the given component into array.
+    template<typename TT>
+    void push_back(TT& component) {
+        int componentPos = arraySize++;
+        this->componentArray[componentPos] = component;
+        this->entityToIndexMap[component.entityID] = componentPos;
+        return;
+    }
+
 
     T& getComponent(int entityID) {
         int index = entityToIndexMap[entityID];
