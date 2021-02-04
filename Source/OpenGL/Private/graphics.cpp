@@ -13,6 +13,17 @@
 #include "graphics.h"
 
 
+
+//===== CALLBACK FUNCTIONS =====
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
+
+
+//===== CLASS DEFINITIONS ===== 
+
 OpenGLGraphicsSystem::OpenGLGraphicsSystem(Engine &_engine) : System(_engine) {
     this->init();  // OpenGL related inits
     return;
@@ -24,6 +35,10 @@ OpenGLGraphicsSystem::OpenGLGraphicsSystem(Engine &_engine) : System(_engine) {
 
 
 void OpenGLGraphicsSystem::update() {
+    glfwPollEvents();
+
+
+
     std::vector<int> entitiesWithSignature = this->engine.getEntitiesWithSignature({Mesh::classID});
 
 
@@ -87,10 +102,10 @@ void OpenGLGraphicsSystem::init() {
 
     assert(glfwInit());  // GLFW failed to init
 
-    glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
+    //glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // We want OpenGL 3.3
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
+    //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // We don't want the old OpenGL
     glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
 
@@ -99,6 +114,10 @@ void OpenGLGraphicsSystem::init() {
 
     glfwMakeContextCurrent(this->window); // Initialize GLEW
     assert(glewInit()==0);  // GLEW failed to init
+
+
+    glViewport(0, 0, 800, 600);
+    glfwSetFramebufferSizeCallback(this->window, framebuffer_size_callback);
 
 
     // vao, vbo, ebo
@@ -165,4 +184,5 @@ void OpenGLGraphicsSystem::init() {
 void OpenGLGraphicsSystem::errorCallback(int error, const char* description) {
     std::cout << "Error: " << description << std::endl;
 }
+
 
