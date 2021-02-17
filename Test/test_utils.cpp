@@ -21,8 +21,8 @@ void objectloader_test() {
 
     loadObjFile("../Assets/cube.obj", vertexBuffer, indexBuffer);
 
-    TEST_ASSERT_EQUAL(indexBuffer[0], 1);  // These values are just hardcoded in from the .obj file.
-    TEST_ASSERT_EQUAL(indexBuffer[1], 2);
+    TEST_ASSERT_EQUAL(indexBuffer[0], 0);  // These values are just hardcoded in from the .obj file.
+    TEST_ASSERT_EQUAL(indexBuffer[1], 1);
 
 
     return;

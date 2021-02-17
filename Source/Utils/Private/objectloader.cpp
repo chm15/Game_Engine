@@ -63,7 +63,7 @@ void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vec
 
                 int v_index = atoi(v_index_str.c_str());
                 v_index  = (  v_index >= 0 ?  v_index : vertexBuffer.size() +  v_index );  // The index can be a negative value for back of array
-                indexBuffer.push_back((unsigned int)v_index);
+                indexBuffer.push_back((unsigned int)v_index - 1);  // Index less one so that indices start at 0 rather than 1.
                 //.push_back((int)t_index_str);  // NO USE FOR THIS YET!
                 //.push_back((int)n_index_str);  // NO USE FOR THIS YET!
             }
