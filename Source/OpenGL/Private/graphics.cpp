@@ -10,6 +10,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <Components/components.h>
+#include <stb_image/stb_image.h>
 #include "graphics.h"
 
 

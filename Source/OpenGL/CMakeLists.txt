@@ -18,4 +18,4 @@ target_include_directories( ${PROJECT_NAME}
 
 find_package(OpenGL)
 
-target_link_libraries(OpenGL Math Components Systems Engine glew glfw OpenGL::GL )
+target_link_libraries(OpenGL Math Components Systems Engine stb_image glew glfw OpenGL::GL)
