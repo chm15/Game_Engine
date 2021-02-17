@@ -7,6 +7,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 #include <Math/vec.h>
 #include <Utils/objectloader.h>
 #include <Engine/engineclass.h>
@@ -22,11 +23,16 @@ public:
 
 // POD
 struct Mesh : public Component<Mesh> {
-    std::vector<Vec3> vertices;
-    std::vector<unsigned int> indices;
-
     Mesh() = default;
-    Mesh(const char *objFile) {
+
+    Mesh(const char *objFile, std::string _textureName = "texture.png") 
+        : textureName(_textureName) {
         loadObjFile(objFile, this->vertices, this->indices);
     }
+
+    std::string textureName;
+
+    std::vector<Vec3> vertices;
+
+    std::vector<unsigned int> indices;
 };
