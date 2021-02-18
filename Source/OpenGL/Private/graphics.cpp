@@ -86,7 +86,7 @@ void OpenGLGraphicsSystem::draw(Mesh& mesh) {
     unsigned char *data = stbi_load(mesh.textureFile.c_str(), &width, &height, &nrChannels, 0);
     if (data) {
         glBindTexture(GL_TEXTURE_2D, this->texture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.textureCoords.size() * sizeof(float),
                 &mesh.textureCoords[0], GL_STREAM_DRAW);
