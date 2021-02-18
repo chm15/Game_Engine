@@ -74,12 +74,6 @@ void OpenGLGraphicsSystem::update() {
 void OpenGLGraphicsSystem::draw(Mesh& mesh) {
     // Draw mesh. Assumes vao, vbo, ebo is already bound.
 
-    //===== Load vbo, ebo =====
-    //vbo
-    glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * 3 * sizeof(float),  // Vec3
-            &mesh.vertices[0], GL_STREAM_DRAW);
-
-
     //===== Load texture =====
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true);
@@ -88,9 +82,16 @@ void OpenGLGraphicsSystem::draw(Mesh& mesh) {
         unsigned int format = nrChannels == 4 ? GL_RGBA : GL_RGB;
         glBindTexture(GL_TEXTURE_2D, this->texture);
         glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glGenerateMipmap(GL_TEXTURE_2D);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.textureCoords.size() * sizeof(float),
-                &mesh.textureCoords[0], GL_STREAM_DRAW);
+
+        glBindBuffer(GL_ARRAY_BUFFER, this->uvo);
+        glBufferData(GL_ARRAY_BUFFER, mesh.textureCoords.size() * sizeof(float),
+                &mesh.textureCoords[0], GL_STATIC_DRAW);
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
         glEnableVertexAttribArray(1);
 
@@ -102,9 +103,17 @@ void OpenGLGraphicsSystem::draw(Mesh& mesh) {
     stbi_image_free(data);
 
 
+    //===== Load vbo, ebo =====
+    //vbo
+    glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
+    glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * 3 * sizeof(float),  // Vec3
+            &mesh.vertices[0], GL_STATIC_DRAW);
+
+
     //ebo (attribpointer not required because ebo just restructures the vao)
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() * sizeof(int),
-            &mesh.indices[0], GL_STREAM_DRAW);
+            &mesh.indices[0], GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);  // must be void* for compatibility with old OpenGL
     glEnableVertexAttribArray(0);
 
@@ -167,6 +176,7 @@ void OpenGLGraphicsSystem::init() {
     glGenVertexArrays(1, &this->vao);
     glGenBuffers(1, &this->vbo);
     glGenBuffers(1, &this->ebo);
+    glGenBuffers(1, &this->uvo);
     glGenTextures(1, &this->texture);
 
     // shaders

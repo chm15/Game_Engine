@@ -22,6 +22,7 @@ public:
 private:
     unsigned int vao;  // vertex array object
     unsigned int vbo;  // vertex buffer object
+    unsigned int uvo;  // UV buffer object
     unsigned int ebo;  // element buffer object
 
     unsigned int vertexShader;

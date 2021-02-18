@@ -16,7 +16,7 @@ public:
     Cube() : GameObject<Cube>{Mesh::classID} {}
     // Contains Mesh component
     void load(ComponentManager& cm, int entityID) override {
-        Mesh mesh("Assets/Textured_Triangle/");
+        Mesh mesh("Assets/Textured_Triangle_2/");
         mesh.entityID = entityID;  // THIS IS SUPER IMPORTANT FOR LINKING THE COMPONENT WITH THIS ENTITY.
         cm.addComponent<Mesh>(mesh);
     }
