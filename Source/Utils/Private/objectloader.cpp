@@ -48,7 +48,7 @@ void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer,
 
         // texture
         if (lineType == "vt") {
-            float s, t;
+            float s = -1.0, t = -1.0;
             lineSS >> s >> t;
             textureCoords.push_back(s);
             textureCoords.push_back(t);
