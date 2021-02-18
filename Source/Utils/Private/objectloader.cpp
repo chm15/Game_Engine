@@ -15,7 +15,8 @@
 #include <assert.h>
 
 
-void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vector<unsigned int>& indexBuffer) {
+void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer,
+        std::vector<unsigned int>& indexBuffer, std::vector<float> textureCoords) {
     /* Loads the .obj file specified at the filename location.
      * This only works for triangles.
      */
@@ -25,6 +26,7 @@ void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vec
     // Clear buffers to avoid errors.
     vertexBuffer.clear();
     indexBuffer.clear();
+    textureCoords.clear();
 
     std::string lineStr;
     std::ifstream inFile(filename);
@@ -45,7 +47,12 @@ void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer, std::vec
         }
 
         // texture
-        //if (lineType == "vt");
+        if (lineType == "vt") {
+            float s, t;
+            lineSS >> s >> t;
+            textureCoords.push_back(s);
+            textureCoords.push_back(t);
+        }
         
         // normal
         //if (lineType == "vn");

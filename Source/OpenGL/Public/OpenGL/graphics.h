@@ -27,6 +27,7 @@ private:
     unsigned int vertexShader;
     unsigned int fragmentShader;
     unsigned int shaderProgram;
+    unsigned int texture;
 
     GLFWwindow* window;
 

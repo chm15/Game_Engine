@@ -25,14 +25,16 @@ public:
 struct Mesh : public Component<Mesh> {
     Mesh() = default;
 
-    Mesh(const char *objFile, std::string _textureName = "texture.png") 
-        : textureName(_textureName) {
-        loadObjFile(objFile, this->vertices, this->indices);
+    Mesh(const char *objFile, std::string _textureFile = "texture.png") 
+        : textureFile(_textureFile) {
+        loadObjFile(objFile, this->vertices, this->indices, this->textureCoords);
     }
 
-    std::string textureName;
+    std::string textureFile;
 
     std::vector<Vec3> vertices;
 
     std::vector<unsigned int> indices;
+
+    std::vector<float> textureCoords;
 };

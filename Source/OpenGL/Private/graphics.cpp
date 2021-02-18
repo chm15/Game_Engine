@@ -74,6 +74,22 @@ void OpenGLGraphicsSystem::update() {
 void OpenGLGraphicsSystem::draw(Mesh& mesh) {
     // Draw mesh. Assumes vao, vbo, ebo is already bound.
 
+    //===== Load texture =====
+
+    int width, height, nrChannels;
+    unsigned char *data = stbi_load(mesh.textureFile.c_str(), &width, &height, &nrChannels, 0);
+    if (data) {
+        glBindTexture(GL_TEXTURE_2D, this->texture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        
+    }
+    else {
+        // Texture failed to load.
+        std::cout << "Texture failed to load from path: " << mesh.textureFile << std::endl; 
+    }
+    stbi_image_free(data);
+
     //===== Load vbo, ebo =====
     //vbo
     glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * 3 * sizeof(float),  // Vec3
@@ -140,6 +156,7 @@ void OpenGLGraphicsSystem::init() {
     glGenVertexArrays(1, &this->vao);
     glGenBuffers(1, &this->vbo);
     glGenBuffers(1, &this->ebo);
+    glGenTextures(1, &this->texture);
 
     // shaders
     this->vertexShader = glCreateShader(GL_VERTEX_SHADER);
