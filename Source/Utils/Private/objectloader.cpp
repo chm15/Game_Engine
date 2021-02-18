@@ -52,6 +52,7 @@ void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer,
             lineSS >> s >> t;
             textureCoords.push_back(s);
             textureCoords.push_back(t);
+            continue;
         }
         
         // normal
