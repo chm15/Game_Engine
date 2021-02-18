@@ -25,9 +25,11 @@ public:
 struct Mesh : public Component<Mesh> {
     Mesh() = default;
 
-    Mesh(const char *objFile, std::string _textureFile = "texture.png") 
-        : textureFile(_textureFile) {
-        loadObjFile(objFile, this->vertices, this->indices, this->textureCoords);
+    Mesh(std::string _directory, const char *objFile = "mesh.obj", const char *_textureFile = "texture.png") 
+        : textureFile(_directory + _textureFile) {
+            //===== Make sure directory is terminated with slash =====
+            if (_directory.back() != '/') { _directory += '/'; }
+        loadObjFile( (_directory + objFile).c_str(), this->vertices, this->indices, this->textureCoords);
     }
 
     std::string textureFile;

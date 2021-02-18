@@ -82,6 +82,7 @@ void OpenGLGraphicsSystem::draw(Mesh& mesh) {
 
     //===== Load texture =====
     int width, height, nrChannels;
+    stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load(mesh.textureFile.c_str(), &width, &height, &nrChannels, 0);
     if (data) {
         glBindTexture(GL_TEXTURE_2D, this->texture);
