@@ -74,15 +74,24 @@ void OpenGLGraphicsSystem::update() {
 void OpenGLGraphicsSystem::draw(Mesh& mesh) {
     // Draw mesh. Assumes vao, vbo, ebo is already bound.
 
-    //===== Load texture =====
+    //===== Load vbo, ebo =====
+    //vbo
+    glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * 3 * sizeof(float),  // Vec3
+            &mesh.vertices[0], GL_STREAM_DRAW);
 
+
+    //===== Load texture =====
     int width, height, nrChannels;
     unsigned char *data = stbi_load(mesh.textureFile.c_str(), &width, &height, &nrChannels, 0);
     if (data) {
         glBindTexture(GL_TEXTURE_2D, this->texture);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
-        
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.textureCoords.size() * sizeof(float),
+                &mesh.textureCoords[0], GL_STREAM_DRAW);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glEnableVertexAttribArray(1);
+
     }
     else {
         // Texture failed to load.
@@ -90,29 +99,29 @@ void OpenGLGraphicsSystem::draw(Mesh& mesh) {
     }
     stbi_image_free(data);
 
-    //===== Load vbo, ebo =====
-    //vbo
-    glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * 3 * sizeof(float),  // Vec3
-            &mesh.vertices[0], GL_STREAM_DRAW);
 
     //ebo (attribpointer not required because ebo just restructures the vao)
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() * sizeof(int),
             &mesh.indices[0], GL_STREAM_DRAW);
-
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);  // must be void* for compatibility with old OpenGL
     glEnableVertexAttribArray(0);
+
 
     //===== Load shader program =====
     glUseProgram(this->shaderProgram);
 
+
     //===== Specify uniforms =====
     //glUniform3f(offsetUniform, 0.0f, 0.0f, 0.0f);
+
 
     // Bind VAO right before drawing.  TODO: This seems redundant.
     glBindVertexArray(this->vao);
 
+
     //===== Draw =====
     glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, (void*)0);
+
 
     //===== Cleanup =====
     glUseProgram(0);
