@@ -16,7 +16,7 @@
 
 
 void loadObjFile(const char* filename, std::vector<Vec3>& vertexBuffer,
-        std::vector<unsigned int>& indexBuffer, std::vector<float> textureCoords) {
+        std::vector<unsigned int>& indexBuffer, std::vector<float>& textureCoords) {
     /* Loads the .obj file specified at the filename location.
      * This only works for triangles.
      */
