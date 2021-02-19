@@ -13,12 +13,15 @@
 
 class Cube : public GameObject<Cube> {
 public:
-    Cube() : GameObject<Cube>{Mesh::classID} {}
+    Cube() : GameObject<Cube>{Mesh::classID, Transform::classID} {}
     // Contains Mesh component
     void load(ComponentManager& cm, int entityID) override {
         Mesh mesh("Assets/Textured_Triangle_2/");
         mesh.entityID = entityID;  // THIS IS SUPER IMPORTANT FOR LINKING THE COMPONENT WITH THIS ENTITY.
         cm.addComponent<Mesh>(mesh);
+
+        Transform transform;
+        cm.addComponent<Transform>(transform);
     }
 };
     
@@ -40,6 +43,7 @@ int main() {
 
     //===== Register Components =====
     engine.registerComponent<Mesh>();
+    engine.registerComponent<Transform>();
     //engine.registerComponent<Transform>();
     
     //===== Register GameObjects =====

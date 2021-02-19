@@ -40,3 +40,14 @@ struct Mesh : public Component<Mesh> {
 
     std::vector<float> textureCoords;
 };
+
+
+struct Transform : public Component<Transform> {
+    Transform() : location(0,0,0), rotation(0,0,0) {}
+
+    Transform(float _x, float _y, float _z) : location(_x,_y,_z), rotation(0,0,0) {}
+
+    Vec3 location;
+
+    Vec3 rotation;
+};
