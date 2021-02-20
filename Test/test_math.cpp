@@ -32,10 +32,6 @@ void vec3size_test() {
 
 
 void vector_test() {
-    Vec<float,3> vecTest;
-
-    Vec3 vecTest2;
-
     Vec3 vecTest3(1,2,3);
 
     TEST_ASSERT_EQUAL(vecTest3.x, 1);

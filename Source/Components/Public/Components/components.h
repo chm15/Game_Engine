@@ -16,6 +16,7 @@ template<typename T>
 class Component : public EngineClass<T> {
 public:
     Component() : entityID(-1) {}
+
     void serialize();
 
     int entityID;  // used to link the component with a certain entity.
@@ -33,11 +34,8 @@ struct Mesh : public Component<Mesh> {
     }
 
     std::string textureFile;
-
     std::vector<Vec3> vertices;
-
     std::vector<unsigned int> indices;
-
     std::vector<float> textureCoords;
 };
 
@@ -47,7 +45,11 @@ struct Transform : public Component<Transform> {
 
     Transform(float _x, float _y, float _z) : location(_x,_y,_z), rotation(0,0,0) {}
 
-    Vec3 location;
+    Transform(Vec3 _location) : location(_location), rotation(0,0,0) {}
 
+    Transform(Vec3 _location, Vec3 _rotation) : location(_location), rotation(_rotation) {}
+
+
+    Vec3 location;
     Vec3 rotation;
 };

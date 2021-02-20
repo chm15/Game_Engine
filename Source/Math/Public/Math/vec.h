@@ -6,79 +6,96 @@
 
 #pragma once
 
-#include <initializer_list>
 
 
 // Vec3 MUST have the same memory footprint as a POD struct
 // comprised of three floats (four bytes each).
 class Vec3 {
 public:
-    Vec3() = default;
+    Vec3() : x(0), y(0), z(0) {}
     Vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
+    Vec3(float val) : x(val), y(val), z(val) {}
 public:
     float x, y, z;
 };
 
 
-
-
-
-
-
-
-
-
-
-
-///////////// FANCY STUFF ///////////////
-//////// AKA EXPENSIVE STUFF ////////////
-
-// Base Vector for purposes of template specialization.
-template<class T, int I>
-class VecBase {
+class Vec4 {
 public:
-    VecBase() : elements{} {}
+    Vec4() : x(0), y(0), z(0), w(0) {}
+    Vec4(float _x, float _y, float _z, float _w) : x(_x), y(_y), z(_z), w(_w) {}
+    Vec4(float val) : x(val), y(val), z(val), w(val) {}
 
-    template<typename... Args>
-    VecBase(Args... args) : elements{static_cast<T>(args)...} {}
+    float operator[](int val) {
+        float data[4] = {x,y,z,w};
+        return data[val];
+    }
 
-protected:
-    T elements[I] {};
-};
+    Vec4 operator+(const Vec4 &other) {
+        return Vec4(x+other.x, y+other.y, z+other.z, w*other.w);
+    }
 
-// Primary Vector template
-template<class T, int I>
-class Vec : public VecBase<T, I> {
+    Vec4 operator-(const Vec4 &other) {
+        return Vec4(x-other.x, y-other.y, z-other.z, w-other.w);
+    }
+
+    float operator*(const Vec4 &other) {
+        return x*other.x + y*other.y + z*other.z + w*other.w;
+    }
+
 public:
-    template<typename... Args>
-    Vec(Args... args) : VecBase<T, I>{args...}{}
-
-};
-
-// Vector template specialization
-template<class T>
-class Vec<T,3> : public VecBase<T, 3> {
-public:
-    T& x = this->elements[0];
-    T& y = this->elements[1];
-    T& z = this->elements[2];
-
-    template<typename... Args>
-    Vec(Args... args) : VecBase<T, 3>{args...}{}
+    float x, y, z, w;
 };
 
 
-template<class T>
-class Vec<T,4> : public VecBase<T, 4> {
+class Mat4 {
 public:
-    T& x = this->elements[0];
-    T& y = this->elements[1];
-    T& z = this->elements[2];
-    T& w = this->elements[3];
+    Mat4() {
+        this->set(0.0);
+    }
 
-    template<typename... Args>
-    Vec(Args... args) : VecBase<T, 4>{args...}{}
+    Mat4(float val) { 
+        this->set(val);
+    }
+
+
+    Mat4(   float x1, float x2, float x3, float x4,
+            float y1, float y2, float y3, float y4,
+            float z1, float z2, float z3, float z4,
+            float w1, float w2, float w3, float w4
+        ) : data{ Vec4(x1,y1,z1,w1), Vec4(x2,y2,z2,w2), Vec4(x3,y3,z3,w3), Vec4(x4,y4,z4,w4)}  {}
+
+
+    void set(float val) {
+        // Set everything to one vale.
+        for (int i=0;i<4;i++) {
+            this->data[i] = Vec4(val);
+        }
+    }
+
+    Vec4 rowVec(int index) {
+        return Vec4(data[0][index], data[1][index], data[2][index], data[3][index]);
+    }
+
+    Vec4 operator*(const Vec4 &other) {
+        Vec4 temp;
+        return Vec4(this->rowVec(0) * other, this->rowVec(1) * other, this->rowVec(2) * other, this->rowVec(3) * other);
+    }
+
+private:
+    Vec4 data[4];
 };
 
 
 
+
+class ScaleMatrix : public Mat4 {
+public:
+    ScaleMatrix(float _x, float _y, float _z) : Mat4(_x,0,0,0,  0,_y,0,0,  0,0,_z,0,  0,0,0,1) {}
+    ScaleMatrix(float val) : Mat4(val,0,0,0,  0,val,0,0,  0,0,val,0,  0,0,0,1) {}
+};
+
+class RotationMatrix : public Mat4 {
+public:
+    
+};
