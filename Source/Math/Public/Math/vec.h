@@ -15,6 +15,29 @@ public:
     Vec3() : x(0), y(0), z(0) {}
     Vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
     Vec3(float val) : x(val), y(val), z(val) {}
+
+    float operator[](int val) {
+        float data[3] = {x,y,z};
+        return data[val];
+    }
+
+    Vec3 operator+(const Vec3 &other) {
+        return Vec3(x+other.x, y+other.y, z+other.z);
+    }
+
+    Vec3 operator-(const Vec3 &other) {
+        return Vec3(x-other.x, y-other.y, z-other.z);
+    }
+
+    float operator*(const Vec3 &other) {
+        return x*other.x + y*other.y + z*other.z;
+    }
+
+    Vec3 operator*(const float &a) {
+        return Vec3(x*a + y*a + z*a);
+    }
+
+
 public:
     float x, y, z;
 };
@@ -42,6 +65,15 @@ public:
     float operator*(const Vec4 &other) {
         return x*other.x + y*other.y + z*other.z + w*other.w;
     }
+
+    Vec4 operator*(const float &a) {
+        return Vec4(x*a + y*a + z*a + w*a);
+    }
+
+    //friend Quat operator*( float a, const Quat& vo) {
+    //    return Quat(a * vo.w, a * vo.v.x, a * vo.v.y, a * vo.v.z);
+    //}
+
 
 public:
     float x, y, z, w;

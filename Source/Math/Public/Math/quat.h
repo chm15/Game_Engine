@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <cmath>
 #include "vec.h"
 
 /* Quaternion class */
@@ -32,7 +33,6 @@ public:
         return *this;
     }
 
-
     inline void set(float _w, float _x, float _y, float _z) {
         this->w = _w;
         this->v = Vec3(_x,_y,_z);
@@ -55,6 +55,17 @@ public:
         this->w = 1.0f;
         this->v = Vec3(0.0f);
         return;
+    }
+
+    inline float length() {
+        return sqrt(w*w + v*v);
+    }
+
+    Quat normalize() {
+        float length = this->length();
+        this->w /= length;
+        this->v = this->v * (1/length);
+        return *this;
     }
 
     Mat4 getMatrix() {
