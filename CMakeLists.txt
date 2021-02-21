@@ -22,6 +22,7 @@ target_link_libraries(GameEngine
     Components
     Systems
     Engine
+    Math
     GameObject
     OpenGL
     glfw

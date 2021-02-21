@@ -9,6 +9,7 @@
 #include <GameObject/gameobject.h>
 #include <Engine/engine.h>
 #include <OpenGL/graphics.h>
+#include <Math/quat.h>
 
 
 class Cube : public GameObject<Cube> {
