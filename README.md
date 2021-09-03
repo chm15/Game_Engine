@@ -1,6 +1,6 @@
 # Game Engine  ![Build](https://github.com/chm15/Game_Engine/workflows/CMake/badge.svg)
 
-This is an entity-component-system based multiplayer game engine.
+This is an entity-component-system based multiplayer game engine (WIP).
   
 ## Building
 
