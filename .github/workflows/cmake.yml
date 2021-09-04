@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: openrndr/setup-opengl@v1.1
-    - run: xvfb-run glxinfo
+    #- run: xvfb-run glxinfo
     - name: Install required Ubuntu packages
       run: |
         sudo apt install libxinerama-dev libxrandr-dev libxcursor-dev libxi-dev libgl1-mesa-dev -y
